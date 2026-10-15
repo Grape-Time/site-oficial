@@ -3699,37 +3699,40 @@ p {
     }
   }
 
-/* 1. Distância entre o texto de desconto e o botão Contratar Custom */
-#planos .custom-offer {
-  margin-top: 18px !important;
-  margin-bottom: 28px !important;
-}
+/* ==========================================================================
+   ALINHAMENTO GLOBAL DOS BOTOES DOS PLANOS
+   ========================================================================== */
 
-/* 2. Cria uma área de topo com altura idêntica para todos os 4 cards */
+/* 1. Estrutura dos Cards para alinhar o topo */
 #planos .plan-card {
   display: flex !important;
   flex-direction: column !important;
 }
 
-/* 3. Garante que o bloco superior (Título + Descrição + Preço/Aviso) tenha a mesma altura total */
-#planos .plan-card > .plan-description {
-  min-height: 48px;
+/* 2. Ajuste do card Custom (aproxima o texto do botao) */
+#planos .custom-card .custom-message {
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+  margin-top: 6px !important;
 }
 
-/* Bloco dos 3 primeiros cards para alcançar a altura do Custom */
-#planos .plan-card:not(.custom-card) .price-detail {
-  min-height: 105px !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-/* Bloco de conteúdo do card Custom para bater exatamente na mesma medida */
 #planos .custom-card .custom-offer {
-  min-height: 65px;
+  margin-top: 10px !important;
+  margin-bottom: 12px !important;
+  min-height: auto !important;
 }
 
-/* 4. Fixa o alinhamento dos botões */
+/* 3. Nivelamento da area de precos (Essential, Professional, Enterprise) */
+#planos .plan-card:not(.custom-card) .price-detail {
+  min-height: 48px !important;
+}
+
+/* 4. Fixa os botoes na mesma linha exata nos 4 cartoes */
 #planos .plan-card > .button {
-  margin-top: 20px !important;
+  margin-top: 16px !important;
+}
+
+/* Garante que o topo do botao do Custom fique perfeitamente alinhado aos outros */
+#planos .custom-card {
+  justify-content: flex-start !important;
 }
