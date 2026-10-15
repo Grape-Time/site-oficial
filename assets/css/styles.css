@@ -1826,10 +1826,11 @@ p {
 
   /* Outras seções no tablet */
   .audience-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     padding-block: 22px;
-    gap: 16px 28px;
+    gap: 12px;
   }
 
   .audience p br {
@@ -1864,6 +1865,7 @@ p {
   .connection-card {
     max-width: 620px;
     width: 100%;
+    margin-inline: auto;
   }
 
   .ai-inner {
@@ -1892,7 +1894,32 @@ p {
   }
 
   .pricing-grid {
-    gap: 15px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 16px;
+    padding-bottom: 14px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    touch-action: pan-x;
+    user-select: none;
+  }
+
+  .pricing-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pricing-grid.is-dragging {
+    cursor: grabbing;
+  }
+
+  .pricing-grid .plan-card {
+    flex: 0 0 clamp(276px, 82vw, 360px);
+    scroll-snap-align: start;
   }
 
   .price strong {
@@ -2079,8 +2106,10 @@ p {
 
   /* Seção público-alvo em celular */
   .audience-inner {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .audience p {
@@ -2231,9 +2260,9 @@ p {
   }
 
   .pricing-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 16px;
     margin-top: 26px;
+    padding-bottom: 14px;
   }
 
   .plan-card {
@@ -2982,11 +3011,11 @@ p {
   border: 0;
 }
 @media (max-width: 1199px) {
-  #planos .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 22px; }
+  #planos .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 }
 @media (max-width: 768px) {
   #planos .eyebrow { font-size: 24px; }
-  #planos .pricing-grid { grid-template-columns: minmax(0, 1fr); }
+  #planos .pricing-grid { display: flex; }
   #planos .plan-card { padding: 28px; }
   #planos .recommended { padding: 27px; }
   #planos .plan-description { min-height: 0; }

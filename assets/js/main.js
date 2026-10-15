@@ -1006,3 +1006,51 @@
     }
   })();
 
+
+
+/* Arraste horizontal dos cards de planos em mobile/tablet */
+(() => {
+  const grids = document.querySelectorAll('.pricing-grid');
+
+  function bind(grid) {
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    grid.addEventListener('mousedown', (event) => {
+      isDown = true;
+      grid.classList.add('is-dragging');
+      startX = event.pageX - grid.getBoundingClientRect().left;
+      scrollLeft = grid.scrollLeft;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDown) return;
+      isDown = false;
+      grid.classList.remove('is-dragging');
+    });
+
+    grid.addEventListener('mouseleave', () => {
+      isDown = false;
+      grid.classList.remove('is-dragging');
+    });
+
+    grid.addEventListener('mousemove', (event) => {
+      if (!isDown) return;
+      event.preventDefault();
+      const x = event.pageX - grid.getBoundingClientRect().left;
+      const walk = x - startX;
+      grid.scrollLeft = scrollLeft - walk;
+    });
+  }
+
+  function init() {
+    grids.forEach(bind);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
