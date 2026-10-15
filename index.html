@@ -488,6 +488,16 @@
   flex-shrink: 0;
 }
 
+
+/* Somente no mensal: valor Pix abaixo de Economize */
+#planos[data-billing="monthly"] [data-plan-card] .price-detail {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 4px;
+}
+
 </style>
 
 <script>
