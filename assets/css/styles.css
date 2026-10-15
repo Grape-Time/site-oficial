@@ -3179,7 +3179,7 @@ p {
   }
 
   #planos[data-billing="annual"] .price-detail {
-    min-height: 124px;
+    min-height: auto;
   }
 
   #planos .plan-card > .button {
@@ -3509,7 +3509,7 @@ p {
   }
 
   #planos[data-billing="annual"] .price-detail {
-    min-height: 124px;
+    min-height: auto;
   }
 
   #planos .plan-card > .button {
