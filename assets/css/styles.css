@@ -2970,7 +2970,7 @@ p {
 #planos .price-detail strong { font-weight: 700; }
 #planos .plan-card > .button {
   min-height: 54px;
-  margin-top: 12px;
+  margin-top: auto;
   padding: 10px 12px;
   gap: 8px;
   font-size: 12px;
@@ -3184,7 +3184,7 @@ p {
 
   #planos .plan-card > .button {
     min-height: 54px;
-    margin-top: 12px;
+    margin-top: auto;
   }
 
   /* Destaques do Pix */
@@ -3261,7 +3261,7 @@ p {
   }
 
   #planos .custom-card > .button {
-    margin-top: 12px;
+    margin-top: auto;
     background: #ffffff;
     border-color: #ffffff;
     color: var(--purple-dark);
@@ -3514,7 +3514,7 @@ p {
 
   #planos .plan-card > .button {
     min-height: 54px;
-    margin-top: 12px;
+    margin-top: auto;
   }
 
   /* Destaques do Pix */
@@ -3591,7 +3591,7 @@ p {
   }
 
   #planos .custom-card > .button {
-    margin-top: 12px;
+    margin-top: auto;
     background: #ffffff;
     border-color: #ffffff;
     color: var(--purple-dark);
