@@ -57,7 +57,7 @@
     }
   });
 
-  const desktopMedia = matchMedia('(min-width: 861px)');
+  const desktopMedia = matchMedia('(min-width: 1025px)');
   desktopMedia.addEventListener('change', closeMenu);
 
   document.addEventListener('click', (event) => {
@@ -944,3 +944,65 @@
     ajustarTextosDoSite();
   }
 })();
+
+
+/* Ajuste mobile extra�do do backup */
+(() => {
+    function iniciarAjustesMobile() {
+      const pagina = document.documentElement;
+
+      if (pagina.dataset.grapeMobileReady === "true") return;
+      pagina.dataset.grapeMobileReady = "true";
+
+      /*
+       * Move o elemento no mobile e restaura sua posição
+       * original quando a tela volta ao desktop.
+       */
+      function moverNoMobile(elemento, destino, consulta, primeiro) {
+        if (!elemento || !destino) return;
+
+        const posicaoOriginal = document.createComment(
+          "Posição original no desktop"
+        );
+
+        elemento.before(posicaoOriginal);
+
+        function atualizarPosicao() {
+          if (consulta.matches) {
+            if (primeiro) {
+              destino.prepend(elemento);
+            } else {
+              destino.append(elemento);
+            }
+          } else {
+            posicaoOriginal.after(elemento);
+          }
+        }
+
+        consulta.addEventListener("change", atualizarPosicao);
+        atualizarPosicao();
+      }
+
+      const navegacao = document.getElementById("navegacao");
+      const apresentacao = document.querySelector(".hero-grid");
+      const faixaRedes = apresentacao?.querySelector(".network-line");
+
+      moverNoMobile(
+        faixaRedes,
+        apresentacao,
+        window.matchMedia("(max-width: 768px)"),
+        false
+      );
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener(
+        "DOMContentLoaded",
+        iniciarAjustesMobile,
+        { once: true }
+      );
+    } else {
+      iniciarAjustesMobile();
+    }
+  })();
+

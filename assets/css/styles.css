@@ -1659,7 +1659,7 @@ p {
 }
 
 /* Tablets (Até 860px) */
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   html {
     scroll-padding-top: 90px;
   }
@@ -1955,7 +1955,7 @@ p {
 }
 
 /* Celulares (Até 640px) */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .container {
     width: calc(100% - 40px);
   }
@@ -2576,14 +2576,14 @@ p {
 }
 
 /* Ajustes para telas menores */
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .site-header .brand img {
     max-width: 140px;
     max-height: 56px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .hero .eyebrow {
     font-size: 16px;
   }
@@ -2634,7 +2634,7 @@ p {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .audience .audience-label,
   .audience .audience-inner > span {
     font-size: 11px;
@@ -2666,7 +2666,7 @@ p {
 }
 
 /* Mesmo ajuste do slogan no celular */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   :is(#a-grape, #como-funciona, #duvidas, #demonstracao) .eyebrow {
     font-size: 16px;
   }
@@ -2984,7 +2984,7 @@ p {
 @media (max-width: 1199px) {
   #planos .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 22px; }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   #planos .eyebrow { font-size: 24px; }
   #planos .pricing-grid { grid-template-columns: minmax(0, 1fr); }
   #planos .plan-card { padding: 28px; }
@@ -3254,7 +3254,7 @@ p {
     color: var(--yellow);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     #planos .plan-description {
       min-height: 0;
     }
@@ -3584,7 +3584,7 @@ p {
     color: var(--yellow);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     #planos .plan-description {
       min-height: 0;
     }
