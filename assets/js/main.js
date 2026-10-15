@@ -108,7 +108,7 @@
         total.textContent = money.format(standard) + ' no total anual';
         detail.append(total);
       }
-      if (pixKnown) {
+      if (pixKnown && !annual) {
         const pixLine = document.createElement('span');
         pixLine.className = 'pix-price';
         const amount = document.createElement('strong');
@@ -475,6 +475,8 @@
 
         const atual = precos[periodo];
 
+        if (!atual || !Number.isFinite(atual.standard)) return;
+
         price.classList.remove('quote');
         currency.hidden = false;
         unidade.hidden = false;
@@ -503,10 +505,6 @@
 
             <span class="saving-label">
               Economize ainda mais
-            </span>
-
-            <span class="pix-price">
-              <strong>${moeda.format(atual.pix)}</strong>/ano no Pix
             </span>
           `;
         } else {
@@ -788,6 +786,8 @@
 
         const atual = precos[periodo];
 
+        if (!atual || !Number.isFinite(atual.standard)) return;
+
         price.classList.remove('quote');
         currency.hidden = false;
         unidade.hidden = false;
@@ -816,10 +816,6 @@
 
             <span class="saving-label">
               Economize ainda mais
-            </span>
-
-            <span class="pix-price">
-              <strong>${moeda.format(atual.pix)}</strong>/ano no Pix
             </span>
           `;
         } else {
