@@ -235,23 +235,46 @@
         body: JSON.stringify(payload),
         signal: controller.signal,
         credentials: 'omit',
-        referrerPolicy: 'no-referrer'
+        referrerPolicy: 'strict-origin-when-cross-origin'
       });
 
+      const result = await response.json().catch(() => null);
+
+      const mensagemServico =
+        typeof result?.message === 'string'
+          ? result.message
+          : '';
+
       if (!response.ok) {
-        throw new Error('HTTP_ERROR');
+        throw new Error(
+          `FormSubmit: HTTP ${response.status}. ${mensagemServico}`
+        );
       }
 
-      const result = await response.json();
+      if (!result) {
+        throw new Error(
+          'O FormSubmit retornou uma resposta em formato inesperado.'
+        );
+      }
 
       if (result.success !== true && result.success !== 'true') {
-        throw new Error('NOT_CONFIRMED');
+        throw new Error(
+          mensagemServico || 'O FormSubmit não confirmou o envio.'
+        );
       }
       status.textContent = 'Solicitação recebida! A equipe entrará em contato para combinar a demonstração. Sua data ainda não está agendada.';
       status.classList.add('success');
       form.reset();
-    } catch {
-      status.textContent = 'Não recebemos a confirmação do envio. Seus dados continuam no formulário. Verifique sua conexão antes de tentar novamente.';
+    } catch (error) {
+      console.error('Erro no envio do formulário:', error);
+
+      status.classList.remove('success');
+
+      status.textContent =
+        'Não conseguimos confirmar o envio agora. ' +
+        'Seus dados continuam preenchidos. ' +
+        'Tente novamente em instantes ou entre em contato pelo e-mail ' +
+        'comercial@grapetecnologia.com.';
     } finally {
       clearTimeout(timeout);
       submitButton.disabled = false;
