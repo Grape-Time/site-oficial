@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 62" role="img" aria-labelledby="title">
+  <title id="title">Grape</title>
+  <defs><linearGradient id="purple" x1="0" x2="1"><stop stop-color="#59308c"/><stop offset="1" stop-color="#a566ef"/></linearGradient></defs>
+  <path d="M42 10c15-11 31 8 49-2-9 11-28 4-38 3l-11-1Z" fill="#027a1e"/>
+  <text x="1" y="51" fill="url(#purple)" font-family="Arial Rounded MT Bold, Trebuchet MS, Arial, sans-serif" font-size="49" font-weight="900" letter-spacing="-3.5">Grape</text>
+</svg>

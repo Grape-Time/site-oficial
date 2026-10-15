@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!-- #Documento HTML da página institucional da Grape -->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#261046">
+  <!-- #Metadados e título da página (SEO/OG) -->
+  <title>Grape — Inteligência que trabalha por você</title>
+  <meta name="description" content="Mais curadoria estratégica, menos operação manual. Conheça a Grape: mapeamento de creators e organização de campanhas no Google Sheets.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Grape — Inteligência que trabalha por você">
+  <meta property="og:description" content="Ganhe tempo e mais produtividade na sua operação de marketing de influência.">
+  <!-- #Ícone da página (favicon) -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <!-- #Estilos (CSS global) -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- #Scripts: configuração pública e interações (defer) -->
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body>
+  <!-- #Link de acessibilidade: pular para o conteúdo principal -->
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <!-- #Cabeçalho do site (header) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- #Marca/logo da Grape -->
+      <a class="brand" href="#inicio" aria-label="Grape, início"><img src="assets/img/grape-logo.png" alt="Grape" width="130" height="45"></a>
+      <!-- #Botão do menu mobile -->
+      <button class="menu-toggle" type="button" aria-controls="navegacao" aria-expanded="false"><span class="menu-bars" aria-hidden="true"></span><span>Menu</span></button>
+      <!-- #Navegação principal -->
+      <nav id="navegacao" class="navigation" aria-label="Navegação principal">
+        <!-- #Link de menu: A Grape -->
+        <a href="#a-grape">A Grape</a>
+        <!-- #Link de menu: Como funciona -->
+        <a href="#como-funciona">Como funciona</a>
+        <!-- #Link de menu: Planos -->
+        <a href="#planos">Planos</a>
+        <!-- #Link de menu: Dúvidas -->
+        <a href="#duvidas">Dúvidas</a>
+        <!-- #Link de menu: Entrar (oculto até configurar URL em config.js) -->
+        <a data-login hidden>Entrar</a>
+        <!-- #Botão de menu: Agendar demonstração -->
+        <a class="button button-dark button-small" href="#demonstracao" data-demo-link>Agendar demonstração <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- #Conteúdo principal da página -->
+  <main id="conteudo">
+    <!-- #Seção Home (hero) -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <!-- #Etiqueta/eyebrow da hero -->
+          <p class="eyebrow">Inteligência que trabalha por você</p>
+          <!-- #Título principal -->
+          <h1 id="hero-title">
+  Menos operação<br>
+  manual<br>
+  <span>Mais curadoria<br>estratégica</span>
+</h1>
+          <!-- #Texto descrição da hero -->
+          <p class="hero-description">Automatize o mapeamento de creators, organize campanhas e acompanhe sua operação a partir do Google Sheets.</p>
+          <!-- #Ações da hero -->
+          <div class="hero-actions">
+            <!-- #Botão: Agendar demonstração (hero) -->
+            <a class="button button-dark" href="#demonstracao" data-demo-link>Agendar demonstração <span aria-hidden="true">↗</span></a>
+            <!-- #Botão: Conhecer a Grape (hero) -->
+            <a class="button button-outline" href="#a-grape">Conhecer a Grape <span aria-hidden="true">↓</span></a>
+          </div>
+          <!-- #Texto: redes suportadas (Instagram, TikTok, YouTube) -->
+          <p class="network-line">
+  Instagram, TikTok e YouTube em um só fluxo
+</p>
+        </div>
+        <!-- #Imagem ilustrativa do produto (planilha Grape) -->
+        <figure class="hero-product-image">
+          <img
+            src="assets/img/grape-planilha.png"
+            alt="Prévia da planilha Grape com dados fictícios. Ganhe tempo e aumente a produtividade."
+            width="1536"
+            height="1024"
+            fetchpriority="high"
+          >
+        </figure>
+      </div>
+    </section>
+
+    <!-- #Seção público-alvo: para quem é a Grape -->
+    <section class="audience" aria-label="Para quem é a Grape">
+      <div class="container audience-inner"><p class="audience-label">Feito pra você:</p><span>Curadores independentes</span><span>Agências</span><span>Operações de marcas</span></div>
+    </section>
+
+    <!-- #Seção A Grape: benefícios (id=a-grape) -->
+    <section class="section benefits" id="a-grape" aria-labelledby="benefits-title">
+      <div class="container">
+        <!-- #Etiqueta/eyebrow: Uma rotina mais inteligente -->
+        <p class="eyebrow">Uma rotina mais inteligente</p>
+        <!-- #Título da seção de benefícios -->
+        <h2 id="benefits-title">Do primeiro perfil<br>à visão da operação.</h2>
+        <!-- #Texto introdutório da seção de benefícios -->
+        <p class="section-intro">Menos informações espalhadas. Mais contexto para selecionar creators, organizar campanhas e acompanhar o trabalho da equipe.</p>
+        <!-- #Grade de cards de benefícios -->
+        <div class="feature-grid">
+          <!-- #Card de benefício: Mapeie com contexto -->
+          <article class="feature-card"><span class="feature-icon lilac" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5"/></svg></span><h3>Mapeie com contexto.</h3><p>Reúna informações de Instagram, TikTok e YouTube para apoiar uma seleção mais criteriosa de creators.</p><span class="feature-tag">Curadoria inteligente</span></article>
+          <!-- #Card de benefício: Organize as campanhas -->
+          <article class="feature-card"><span class="feature-icon green" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="3"/><path d="M8 6V4h8v2M4 11c4 3 12 3 16 0M10 12h4"/></svg></span><h3>Organize as campanhas.</h3><p>Conecte perfis e informações da campanha à sua rotina de curadoria, sem depender de uma sequência de copiar e colar.</p><span class="feature-tag">Campanhas + planilha</span></article>
+          <!-- #Card de benefício: Enxergue a operação -->
+          <article class="feature-card"><span class="feature-icon yellow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4v16h16M9 16v-5m5 5V6m5 10V9"/></svg></span><h3>Enxergue a operação.</h3><p>Amplie a visão do trabalho com recursos de gestão e, no Enterprise, dashboard de produtividade e personalização.</p><span class="feature-tag">Gestão + produtividade</span></article>
+        </div>
+        <!-- #Nota de rodapé: disponibilidade por plano -->
+        <p class="footnote">A disponibilidade dos recursos varia conforme o plano.</p>
+      </div>
+    </section>
+
+    <!-- #Seção Como funciona (id=como-funciona) -->
+    <section class="section how-section" id="como-funciona" aria-labelledby="how-title">
+      <div class="container how-grid">
+        <div>
+          <!-- #Etiqueta/eyebrow: Como funciona -->
+          <p class="eyebrow">Como funciona</p>
+          <!-- #Título da seção Como funciona -->
+          <h2 id="how-title">Você traz o olhar.<br>A Grape apoia o fluxo.</h2>
+          <!-- #Texto introdutório da seção Como funciona -->
+          <p class="section-intro">A familiaridade do Google Sheets com uma camada de automação para o trabalho de curadoria.</p>
+          <!-- #Lista de passos (01, 02, 03) -->
+          <ol class="steps">
+            <!-- #Passo 01: Informe o perfil -->
+            <li><span class="step-number">01</span><div><h3>Informe o perfil.</h3><p>Comece pelo link ou @ do creator que deseja mapear.</p></div></li>
+            <!-- #Passo 02: Confirme as conexões -->
+            <li><span class="step-number">02</span><div><h3>Confirme as conexões.</h3><p>Revise os vínculos sugeridos entre as redes antes de confirmar a identidade do creator.</p></div></li>
+            <!-- #Passo 03: Organize e acompanhe -->
+            <li><span class="step-number">03</span><div><h3>Organize e acompanhe.</h3><p>Use os dados na curadoria e mantenha o trabalho conectado à campanha.</p></div></li>
+          </ol>
+        </div>
+        <!-- #Card ilustrativo de conexões de um creator -->
+        <div class="connection-card">
+          <div class="connection-heading"><h3>Um creator. Diferentes redes.</h3><span>Exemplo visual</span></div>
+          <!-- #Etiqueta: Perfil informado -->
+          <span class="example-label">Perfil informado</span>
+          <!-- #Exemplo de perfil digitado -->
+          <div class="example-input" id="example-profile" role="img" aria-label="Perfil fictício ana.exemplo">@ana.exemplo <span aria-hidden="true">↗</span></div>
+          <!-- #Linhas de conexão (decorativas) -->
+          <div class="connection-lines" aria-hidden="true"><i></i></div>
+          <!-- #Cards das redes conectadas: Instagram, TikTok, YouTube -->
+          <div class="network-cards"><div><strong>Instagram</strong><span>@ana.exemplo</span></div><div><strong>TikTok</strong><span>@ana.exemplo</span></div><div><strong>YouTube</strong><span>Ana Exemplo</span></div></div>
+          <!-- #Mensagem de revisão: a decisão continua sendo sua -->
+          <div class="review-message"><span aria-hidden="true">✓</span><div><strong>A decisão continua sendo sua.</strong><p>Revise os vínculos propostos antes de confirmar.</p></div></div>
+          <!-- #Nota: representação conceitual -->
+          <p class="connection-note">Representação conceitual do fluxo. Perfis fictícios.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- #Faixa de apoio da IA (ai-strip) -->
+    <section class="ai-strip" aria-label="Inteligência artificial na curadoria">
+      <div class="container ai-inner"><span class="sparkle" aria-hidden="true">✦</span><div><h2>Inteligência para apoiar. Não para decidir por você.</h2><p>Recursos de IA para apoiar a curadoria, mantendo o olhar crítico e a revisão humana no processo.</p></div><span class="ai-plan">A partir do Professional</span></div>
+    </section>
+
+    <!-- #Seção Planos e preços (id=planos) -->
+    <section class="section pricing" id="planos" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-center">
+          <p class="eyebrow">Planos e preços</p>
+          <h2 id="pricing-title">O tamanho certo para a sua operação</h2>
+          <p class="section-intro">Da curadoria independente à gestão de grandes equipes. Escolha o plano que acompanha a sua rotina</p>
+        </div>
+        <div class="pricing-controls">
+          <div class="control-group"><div class="segmented" role="group" aria-label="Período de contratação"><button type="button" class="selected" data-period="monthly" aria-pressed="true">Mensal</button><button type="button" data-period="annual" aria-pressed="false">Anual</button></div></div>
+        </div>
+        <p id="pricing-status" role="status" aria-atomic="true"></p>
+        <div class="pricing-grid">
+          <article class="plan-card" data-plan-card="essential"><h3>Essential</h3><p class="plan-description">Para freelancers e curadores solo</p><div class="price"><span class="currency">R$</span><strong data-price>679</strong><span class="price-unit">/mês</span></div><p class="price-detail">Condições de pagamento sob consulta</p><a class="button button-outline" href="#demonstracao" data-plan="essential">Contratar Essential</a><div class="plan-features"><p>Uma base para automatizar a rotina.</p><ul><li>Até <strong>500 perfis/mês</strong></li><li><strong>1 usuário</strong></li><li><strong>10 campanhas</strong></li><li>Rotina automatizada</li></ul></div></article>
+          <article class="plan-card recommended" data-plan-card="professional"><span class="recommended-label">Recomendado</span><h3>Professional</h3><p class="plan-description">Para pequenas e médias agências</p><div class="price"><span class="currency">R$</span><strong data-price>1.259</strong><span class="price-unit">/mês</span></div><p class="price-detail">Condições de pagamento sob consulta</p><a class="button button-purple" href="#demonstracao" data-plan="professional">Contratar Professional</a><div class="plan-features"><p>Tudo do Essential, com mais capacidade.</p><ul><li>Até <strong>1.000 perfis/mês</strong></li><li>Até <strong>4 usuários</strong></li><li><strong>Campanhas ilimitadas</strong></li><li><strong>Recursos de IA</strong></li><li>Rotina automatizada</li></ul></div></article>
+          <article class="plan-card" data-plan-card="enterprise"><h3>Enterprise</h3><p class="plan-description">Para grandes agências e operações de marcas</p><div class="price"><span class="currency">R$</span><strong data-price>5.870</strong><span class="price-unit">/mês</span></div><p class="price-detail">Condições de pagamento sob consulta</p><a class="button button-outline" href="#demonstracao" data-plan="enterprise">Contratar Enterprise</a><div class="plan-features"><p>Tudo do Professional, com mais estrutura.</p><ul><li>Até <strong>5.000 perfis/mês</strong></li><li>Equipe conforme contratação</li><li>Suporte prioritário</li><li><strong>Dashboard de produtividade</strong></li><li>Personalização</li></ul></div></article>
+          <article class="plan-card custom-card" aria-labelledby="custom-plan-title">
+            <h3 id="custom-plan-title">Custom</h3>
+            <div class="custom-copy">
+              <p class="custom-headline">Personalize do seu jeito</p>
+              <p class="custom-description">Defina o volume de perfis, o tamanho da equipe e os recursos de acordo com sua necessidade</p>
+            </div>
+            <a class="button button-outline" href="#demonstracao" data-plan="custom">Contratar Custom</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- #Seção Dúvidas frequentes (id=duvidas) -->
+    <section class="section faq-section" id="duvidas" aria-labelledby="faq-title">
+      <div class="container faq-grid"><div><p class="eyebrow">Perguntas frequentes</p><h2 id="faq-title">Antes de dar<br>o próximo passo.</h2><p class="section-intro">O que você precisa saber para entender como a Grape se encaixa na sua rotina.</p></div>
+        <!-- #Lista de perguntas e respostas (FAQ) -->
+        <div class="faq-list">
+          <!-- #FAQ item 1 (aberto) -->
+          <details open><summary>A Grape substitui o Google Sheets?<span aria-hidden="true"></span></summary><p>Não. A proposta mantém o Google Sheets como interface de trabalho, com automação e recursos da Grape apoiando a curadoria e a organização das campanhas.</p></details>
+          <!-- #FAQ item 2 -->
+          <details><summary>Quais redes fazem parte do fluxo?<span aria-hidden="true"></span></summary><p>Instagram, TikTok e YouTube. Você pode organizar informações dessas redes no fluxo de curadoria e revisar as conexões entre os perfis de um creator.</p></details>
+          <!-- #FAQ item 3 -->
+          <details><summary>Os vínculos entre perfis são automáticos?<span aria-hidden="true"></span></summary><p>A Grape pode sugerir conexões, mas a confirmação da identidade passa pela sua revisão. Você mantém o controle antes de vincular os perfis.</p></details>
+          <!-- #FAQ item 4 -->
+          <details><summary>A IA está disponível em todos os planos?<span aria-hidden="true"></span></summary><p>Os recursos de inteligência artificial estão disponíveis a partir do plano Professional. O Essential concentra os recursos de automação da rotina.</p></details>
+          <!-- #FAQ item 5 -->
+          <details><summary>Como conhecer a Grape?<span aria-hidden="true"></span></summary><p>Solicite uma demonstração para conversar com a equipe e conhecer a ferramenta em uma apresentação. A Grape não oferece teste grátis; a demonstração ajuda a entender o fluxo e escolher o plano adequado.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- #Seção Demonstração/Contato (id=demonstracao) -->
+    <section class="section contact-section" id="demonstracao" aria-labelledby="contact-title">
+      <div class="container"><div class="contact-panel">
+        <!-- #Coluna de texto (chamada) -->
+        <div class="contact-copy"><p class="eyebrow">Vamos conhecer a sua operação?</p><h2 id="contact-title">Mais tempo para<br>o que só você<br>sabe fazer.</h2><p>Conte um pouco sobre sua rotina e conheça a proposta da Grape para a sua curadoria.</p><p class="contact-call">Uma conversa com nossa equipe para apresentar a ferramenta e tirar suas dúvidas.</p></div>
+        <!-- #Formulário de solicitação de demonstração -->
+        <form id="demo-form" class="demo-form">
+<input
+  type="text"
+  name="_honey"
+  style="display: none;"
+  tabindex="-1"
+  autocomplete="off"
+  aria-hidden="true"
+>
+          <!-- #Linha do formulário: Nome e Empresa -->
+          <div class="form-row"><div class="form-field"><label for="name">Seu nome</label><input id="name" name="name" autocomplete="name" placeholder="Como podemos te chamar?" maxlength="100" required></div><div class="form-field"><label for="company">Empresa</label><input id="company" name="company" autocomplete="organization" placeholder="Sua agência ou marca" maxlength="150" required></div></div>
+          <!-- #Campo: E-mail profissional -->
+          <div class="form-field"><label for="email">E-mail profissional</label><input id="email" name="email" type="email" autocomplete="email" placeholder="voce@empresa.com.br" maxlength="254" required></div>
+          <!-- #Campo: Perfil da operação -->
+          <div class="form-field"><label for="profile">Qual opção descreve sua operação?</label><select id="profile" name="profile" required><option value="">Selecione uma opção</option><option>Curadoria independente</option><option>Agência de marketing de influência</option><option>Operação de marca</option><option>Outra operação</option></select></div>
+          <!-- #Campo: Plano de interesse -->
+          <div class="form-field"><label for="interest">Qual plano você quer conhecer?</label><select id="interest" name="interest"><option value="undecided">Ainda não sei — preciso de orientação</option><option value="essential">Essential</option><option value="professional">Professional</option><option value="enterprise">Enterprise</option><option value="custom">Custom — plano sob medida</option></select></div>
+          <!-- #Botão de envio do formulário -->
+          <button class="button button-yellow form-submit" type="submit" disabled><span id="submit-label">Preparar solicitação</span><span aria-hidden="true">↗</span></button>
+          <!-- #Texto de ajuda do formulário -->
+          <p class="form-help" id="form-help">Você poderá revisar e copiar sua solicitação. Nenhum dado será enviado nesta prévia.</p>
+          <!-- #Status do formulário -->
+          <p class="form-status" id="form-status" role="status" tabindex="-1"></p>
+          <noscript><p>Ative o JavaScript para preparar sua solicitação de demonstração.</p></noscript>
+        </form>
+      </div></div>
+    </section>
+  </main>
+
+  <!-- #Rodapé do site (footer) -->
+  
+
+<footer class="site-footer">
+  <div class="container">
+
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-identity">
+          <a href="#inicio" aria-label="Grape, voltar ao início">
+            <img
+              src="assets/img/grape-logo.png"
+              alt="Grape"
+              width="116"
+            >
+          </a>
+        </div>
+      </div>
+
+      <a
+        class="footer-email"
+        href="mailto:comercial@grapetecnologia.com"
+      >
+        comercial@grapetecnologia.com
+      </a>
+
+      <nav aria-label="Navegação do rodapé">
+        <a href="#a-grape">A Grape</a>
+        <a href="#planos">Planos</a>
+        <a href="#demonstracao">Contato</a>
+
+        <a
+          href="http://documentos.grapetecnologia.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Termos e privacidade
+        </a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-cnpj">
+        CNPJ: 69.429.525/0001-43
+      </p>
+
+      <p class="footer-copyright">
+        Grape · Todos os direitos reservados ·
+        <span id="year">2026</span>
+      </p>
+
+      <p class="footer-signature">
+        <span aria-hidden="true">✦</span>
+        Pessoas criam. A Grape otimiza.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+
+  <!-- #Diálogo/modal de resumo da solicitação -->
+  <dialog class="request-dialog" id="request-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <!-- #Botão de fechar do diálogo -->
+    <button class="dialog-close" type="button" aria-label="Fechar resumo da solicitação">×</button>
+    <!-- #Título do diálogo -->
+    <p class="eyebrow">Sua próxima conversa</p><h2 id="dialog-title">Solicitação preparada.</h2>
+    <!-- #Descrição do diálogo -->
+    <p id="dialog-description">Confira o resumo abaixo. Ele ainda não foi enviado à equipe da Grape.</p>
+    <!-- #Campo de resumo (somente leitura) -->
+    <label for="request-summary">Resumo da solicitação</label><textarea id="request-summary" readonly rows="10"></textarea>
+    <!-- #Ações do diálogo -->
+    <div class="dialog-actions"><button type="button" class="button button-dark" id="copy-request">Copiar solicitação</button><a class="button button-outline" id="email-request" hidden>Abrir no e-mail</a><button type="button" class="button button-outline" id="download-request">Baixar resumo</button></div>
+    <!-- #Status do diálogo -->
+    <p class="dialog-status" id="dialog-status" role="status"></p>
+  </dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

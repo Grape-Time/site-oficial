@@ -1,0 +1,14 @@
+{
+  "name": "grape-site-oficial",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Site institucional da Grape — estrutura estática responsiva",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node --check assets/js/config.js && node --check assets/js/main.js && node --check scripts/serve.mjs && node --check scripts/build.mjs"
+  }
+}

@@ -1,0 +1,3328 @@
+/* ==========================================================================
+   GRAPE — IDENTIDADE VISUAL E LAYOUT RESPONSIVO
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIÁVEIS DE TEMA (Cores, fontes e bordas reutilizáveis)
+   -------------------------------------------------------------------------- */
+:root {
+  --purple: #9052dd;
+  --purple-dark: #261046;
+  --green: #027a1e;
+  --yellow: #fff1a0;
+  --ink: #301849;
+  --muted: #756b82;
+  --line: #e9dff3;
+  --surface: #f8f5fc;
+  --white: #fff;
+  --font: 'Segoe UI', Arial, Helvetica, sans-serif;
+  --radius: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET E ESTILOS BASE GLOBAIS
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 108px;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--white);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  min-width: 0;
+}
+
+button,
+a,
+input,
+select,
+summary,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 5px;
+}
+
+::selection {
+  background: #dfc5ff;
+  color: var(--purple-dark);
+}
+
+/* --------------------------------------------------------------------------
+   3. CONTAINER E TIPOGRAFIA DE SEÇÃO
+   -------------------------------------------------------------------------- */
+.container {
+  width: min(1200px, calc(100% - 96px));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: 100px;
+}
+
+.section h2 {
+  font-size: clamp(32px, 3.3vw, 46px);
+  font-weight: 750;
+  line-height: 1.12;
+  letter-spacing: -1.9px;
+}
+
+.section-intro {
+  max-width: 635px;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* Tag / Chapeuzinho da seção (pequeno texto verde acima do título) */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  color: var(--green);
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 2px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  background: currentColor;
+  border-radius: 50%;
+}
+
+/* Alignment utilities */
+.section-center {
+  text-align: center;
+}
+
+.section-center .eyebrow {
+  justify-content: center;
+}
+
+.section-center .section-intro {
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   4. BOTÕES E VARIANTES
+   -------------------------------------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 51px;
+  padding: 12px 21px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: center;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button span[aria-hidden] {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Estilos de Cores do Botão */
+.button-dark {
+  background: var(--purple-dark);
+  color: white;
+  box-shadow: 0 5px 13px #26104615;
+}
+
+.button-dark:hover {
+  background: #422164;
+  box-shadow: 0 7px 17px #26104625;
+}
+
+.button-purple {
+  color: white;
+  background: #8140cb;
+}
+
+.button-purple:hover {
+  background: #7032b6;
+}
+
+.button-outline {
+  border-color: var(--line);
+  background: white;
+  color: var(--purple-dark);
+}
+
+.button-outline:hover {
+  border-color: var(--purple);
+  background: #fcfaff;
+}
+
+.button-yellow {
+  background: var(--yellow);
+  color: var(--purple-dark);
+}
+
+.button-yellow:hover {
+  background: #ffe878;
+}
+
+.button-small {
+  min-height: 42px;
+  padding: 10px 17px;
+  font-size: 12px;
+  gap: 10px;
+}
+
+/* Link de acessibilidade (saltar direto para conteúdo) */
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: -100px;
+  left: 20px;
+  background: var(--purple-dark);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   5. CABEÇALHO (Site Header)
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid #eee8f5;
+  background: #fffffff5;
+  backdrop-filter: blur(14px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 86px;
+  gap: 24px;
+}
+
+.brand {
+  flex-shrink: 0;
+}
+
+.brand img {
+  width: 130px;
+  height: 45px;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 27px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.navigation > a:not(.button):hover {
+  color: var(--purple);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION (Destaque Principal da Home)
+   -------------------------------------------------------------------------- */
+.hero {
+  overflow: hidden;
+  background: radial-gradient(ellipse at 89% 43%, #efe4ff 0, #faf7ff 32%, #fff 69%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 0.97fr 1.03fr;
+  gap: 52px;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 82px;
+  min-height: 680px;
+}
+
+.hero .eyebrow {
+  font-size: 10px;
+  margin-bottom: 17px;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 4.15vw, 60px);
+  font-weight: 800;
+  letter-spacing: -3px;
+  line-height: 1.01;
+}
+
+.hero h1 > span {
+  color: var(--purple);
+}
+
+.hero-description {
+  max-width: 430px;
+  margin-top: 25px;
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.network-line {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   7. ILUSTRAÇÃO/MOCKUP DO PRODUTO (Preview Interativo)
+   -------------------------------------------------------------------------- */
+.product-composition {
+  position: relative;
+  min-width: 0;
+  padding-top: 32px;
+  padding-bottom: 52px;
+}
+
+.product-sticker {
+  position: absolute;
+  z-index: 3;
+  right: 13px;
+  top: 1px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 11px 15px;
+  border-radius: 8px;
+  color: white;
+  background: var(--purple);
+  font-size: 11px;
+  font-weight: 700;
+  transform: rotate(3deg);
+  box-shadow: 0 6px 18px #9052dd22;
+}
+
+.product-sticker span {
+  font-size: 19px;
+  color: var(--yellow);
+}
+
+.product-preview {
+  position: relative;
+  height: 372px;
+  overflow: hidden;
+  margin: 0;
+  background: white;
+  border: 1px solid #e6d6f9;
+  border-radius: 15px;
+  box-shadow: 0 25px 60px #55278312;
+}
+
+/* Barra superior do mockup da janela */
+.preview-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 34px;
+  padding-inline: 13px;
+  color: #8c7a9f;
+  background: #fcfaff;
+  border-bottom: 1px solid #f0e7f9;
+  font-size: 8px;
+}
+
+.window-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.window-dots i {
+  width: 5px;
+  height: 5px;
+  background: #decbf7;
+  border-radius: 50%;
+}
+
+/* Layout interno do mockup */
+.preview-layout {
+  display: flex;
+  min-height: 365px;
+}
+
+.preview-sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 75px;
+  gap: 11px;
+  padding: 16px 7px;
+  border-right: 1px solid #f1eafa;
+  background: #fdfbff;
+  font-size: 8px;
+  color: #92849f;
+}
+
+.preview-sidebar b {
+  padding-left: 5px;
+  margin-bottom: 10px;
+  color: var(--purple);
+  font-size: 18px;
+}
+
+.preview-sidebar span {
+  padding: 5px;
+}
+
+.preview-sidebar .active {
+  background: #eee4fc;
+  color: #713bb8;
+  border-radius: 4px;
+}
+
+.preview-content {
+  flex: 1;
+  min-width: 0;
+  padding: 23px 17px;
+}
+
+.preview-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.preview-heading h2 {
+  font-size: 15px;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+.preview-heading p {
+  margin-top: 4px;
+  color: #918599;
+  font-size: 8px;
+}
+
+.avatar {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f1e5ff;
+  color: var(--purple);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Métricas do mockup */
+.preview-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 17px;
+}
+
+.preview-metrics div {
+  background: #f8f5fc;
+  border: 1px solid #efe6f9;
+  border-radius: 6px;
+  padding: 10px 8px;
+}
+
+.preview-metrics div:first-child {
+  background: #f0e6fb;
+}
+
+.preview-metrics small {
+  display: block;
+  color: #897799;
+  font-size: 7px;
+}
+
+.preview-metrics strong {
+  display: block;
+  font-size: 19px;
+  line-height: 1.3;
+}
+
+/* Tabela interna do mockup */
+.table-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  margin-top: 19px;
+  margin-bottom: 10px;
+  font-size: 10px;
+}
+
+.table-heading span {
+  color: var(--green);
+  font-size: 7px;
+  padding: 2px 5px;
+  background: #edf7ed;
+  border-radius: 3px;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1.7fr 0.7fr 0.8fr;
+  align-items: center;
+  min-height: 44px;
+  border-bottom: 1px solid #f3edf8;
+  gap: 5px;
+  font-size: 8px;
+}
+
+.table-labels {
+  min-height: 23px;
+  color: #a196aa;
+  font-size: 7px;
+}
+
+.table-row > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.table-row b {
+  font-size: 8px;
+}
+
+.table-row small {
+  display: block;
+  color: #aaa0b2;
+  font-size: 6px;
+  font-weight: 400;
+}
+
+.mini-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  font-size: 6px;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.preview-fade {
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  background: linear-gradient(transparent, white);
+}
+
+/* Cards flutuantes de nota/controle */
+.control-note {
+  position: absolute;
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  left: -20px;
+  bottom: 29px;
+  z-index: 2;
+  background: white;
+  border: 1px solid #f3eef7;
+  padding: 17px 18px;
+  border-radius: 12px;
+  box-shadow: 0 14px 35px #26104616;
+}
+
+.check-circle {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--green);
+  background: #ecf7ec;
+}
+
+.control-note strong {
+  display: block;
+  font-size: 11px;
+}
+
+.control-note div > span {
+  display: block;
+  margin-top: 2px;
+  color: #8b8194;
+  font-size: 9px;
+}
+
+.preview-caption {
+  position: absolute;
+  right: 0;
+  bottom: 6px;
+  width: 50%;
+  color: #9b8da7;
+  font-size: 8px;
+  line-height: 1.5;
+  text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   8. SEÇÃO PÚBLICO-ALVO
+   -------------------------------------------------------------------------- */
+.audience {
+  border-block: 1px solid #f1eaf6;
+}
+
+.audience-inner {
+  min-height: 88px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+
+.audience p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.audience p strong {
+  font-weight: 600;
+}
+
+.audience-inner > span {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.audience-inner > span::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  border: 1px solid #cbb0e9;
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+/* --------------------------------------------------------------------------
+   9. SEÇÃO "A GRAPE": BENEFÍCIOS (Grade de Recursos/Features)
+   -------------------------------------------------------------------------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 38px;
+}
+
+.feature-card {
+  padding: 29px 26px 25px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  margin-bottom: 24px;
+}
+
+.feature-icon svg {
+  width: 23px;
+  height: 23px;
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+/* Cores dos ícones */
+.lilac {
+  background: #f0e4ff;
+  color: #8447c9;
+}
+
+.green {
+  background: #e9f5eb;
+  color: var(--green);
+}
+
+.yellow {
+  background: #fff6bc;
+  color: #796413;
+}
+
+.feature-card h3 {
+  font-size: 21px;
+  font-weight: 650;
+  letter-spacing: -0.6px;
+}
+
+.feature-card > p {
+  margin-top: 12px;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.feature-tag {
+  margin-top: auto;
+  font-size: 9px;
+  font-weight: 650;
+  text-transform: uppercase;
+  background: var(--surface);
+  color: #6c5184;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+}
+
+.footnote {
+  color: #8d8298;
+  margin-top: 16px;
+  font-size: 11px;
+}
+
+/* --------------------------------------------------------------------------
+   10. SEÇÃO "COMO FUNCIONA" (Passo a passo + Conexões)
+   -------------------------------------------------------------------------- */
+.how-section {
+  background: var(--surface);
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.how-grid .section-intro {
+  max-width: 450px;
+}
+
+/* Lista de passos */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  list-style: none;
+  padding: 0;
+  margin: 30px 0 0;
+}
+
+.steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+}
+
+.step-number {
+  display: grid;
+  place-items: center;
+  flex: 0 0 30px;
+  height: 31px;
+  border: 1px solid #e9ddf6;
+  border-radius: 7px;
+  background: white;
+  font-size: 11px;
+  color: #8046c2;
+  font-weight: 700;
+}
+
+.steps h3 {
+  font-size: 16px;
+}
+
+.steps p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+/* Card demonstrativo de conexões */
+.connection-card {
+  padding: 29px;
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid #eee4f8;
+  box-shadow: 0 20px 45px #36155c08;
+}
+
+.connection-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.connection-heading h3 {
+  font-size: 17px;
+  letter-spacing: -0.6px;
+}
+
+.connection-heading > span {
+  font-size: 8px;
+  color: #9782ac;
+  text-transform: uppercase;
+}
+
+.example-label {
+  display: block;
+  font-size: 11px;
+  color: #84778e;
+  margin-top: 24px;
+}
+
+.example-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #ebd8ff;
+  box-shadow: 0 0 0 3px #fcf8ff;
+  border-radius: 7px;
+  padding: 12px;
+  margin-top: 7px;
+  font-size: 13px;
+  color: #796b84;
+}
+
+.example-input span {
+  color: var(--purple);
+}
+
+.connection-lines {
+  width: 68%;
+  margin: 0 auto;
+  height: 45px;
+  position: relative;
+}
+
+.connection-lines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 25px;
+  border-left: 1px solid #e5d8f4;
+}
+
+.connection-lines::after {
+  content: '';
+  position: absolute;
+  inset: 24px 0 0;
+  border: 1px solid #e5d8f4;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+}
+
+.connection-lines i {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 20px;
+  border-left: 1px solid #e5d8f4;
+}
+
+.network-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.network-cards > div {
+  padding: 21px 7px;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+}
+
+.network-cards strong {
+  font-size: 12px;
+}
+
+.network-cards span {
+  display: block;
+  color: #9a8ba6;
+  font-size: 9px;
+  margin-top: 6px;
+}
+
+.review-message {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f0f7ed;
+  padding: 17px;
+  margin-top: 20px;
+  border-radius: 8px;
+  color: #31663b;
+}
+
+.review-message > span {
+  font-size: 20px;
+}
+
+.review-message strong {
+  display: block;
+  font-size: 11px;
+}
+
+.review-message p {
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+.connection-note {
+  color: #9b8ca5;
+  font-size: 9px;
+  margin-top: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   11. FAIXA DE INTELIGÊNCIA ARTIFICIAL (AI Strip)
+   -------------------------------------------------------------------------- */
+.ai-strip {
+  background: #fff9d9;
+  border-block: 1px solid #f7efc5;
+  padding: 39px 0;
+}
+
+.ai-inner {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.sparkle {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  font-size: 26px;
+  background: var(--yellow);
+}
+
+.ai-inner h2 {
+  font-size: 23px;
+  line-height: 1.4;
+  letter-spacing: -0.7px;
+}
+
+.ai-inner p {
+  margin-top: 7px;
+  color: #796f64;
+  font-size: 13px;
+  max-width: 750px;
+}
+
+.ai-plan {
+  flex-shrink: 0;
+  margin-left: auto;
+  border: 1px solid #eddf9e;
+  background: #fffdf0;
+  border-radius: 20px;
+  padding: 7px 12px;
+  font-size: 10px;
+  color: #68521a;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   12. SEÇÃO PLANOS E PREÇOS
+   -------------------------------------------------------------------------- */
+.pricing-controls {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin-top: 32px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.control-group > span {
+  font-size: 11px;
+  color: #7b6d88;
+}
+
+/* Alternador de período (Anual/Mensal) */
+.segmented {
+  display: flex;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  gap: 3px;
+}
+
+.segmented button {
+  min-height: 38px;
+  padding: 9px 17px;
+  border: 0;
+  background: transparent;
+  border-radius: 6px;
+  color: #79658e;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.segmented .selected {
+  color: white;
+  background: var(--purple-dark);
+  box-shadow: 0 3px 7px #26104615;
+}
+
+.pricing-note {
+  margin-top: 15px;
+  text-align: center;
+  color: #8c8096;
+  font-size: 11px;
+  min-height: 36px;
+}
+
+/* Cards de Preço */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 28px;
+  align-items: stretch;
+}
+
+.plan-card {
+  position: relative;
+  padding: 28px 25px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.plan-card h3 {
+  font-size: 21px;
+  letter-spacing: -0.6px;
+}
+
+.plan-description {
+  min-height: 52px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 16px;
+  line-height: 1;
+  min-height: 52px;
+}
+
+.price .currency {
+  font-size: 18px;
+  font-weight: 700;
+  align-self: flex-start;
+  padding-top: 11px;
+}
+
+.price strong {
+  font-size: 45px;
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+
+.price .price-unit {
+  font-size: 11px;
+  color: #8d7f97;
+}
+
+.price.quote strong {
+  font-size: 31px;
+  letter-spacing: -1px;
+  padding-top: 12px;
+}
+
+.price-detail {
+  color: #8d8198;
+  font-size: 10px;
+  min-height: 35px;
+  margin-top: 7px;
+}
+
+.plan-card > .button {
+  display: flex;
+  margin-top: 28px;
+  width: 100%;
+  font-size: 11px;
+  gap: 10px;
+}
+
+.plan-features {
+  margin-top: 25px;
+  padding-top: 23px;
+  border-top: 1px solid #eee6f6;
+}
+
+.plan-features > p {
+  color: #93889e;
+  font-size: 10px;
+}
+
+.plan-features ul {
+  padding: 0;
+  margin: 16px 0 0;
+  list-style: none;
+}
+
+.plan-features li {
+  position: relative;
+  margin-top: 12px;
+  padding-left: 19px;
+  font-size: 12px;
+  color: #74617f;
+}
+
+.plan-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.plan-features strong {
+  color: #49315d;
+  font-weight: 650;
+}
+
+/* Destaque do Plano Recomendado */
+.recommended {
+  border: 2px solid var(--purple);
+  padding: 27px 24px;
+  background: #fcf9ff;
+  box-shadow: 0 15px 40px #9052dd0b;
+}
+
+.recommended-label {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 18px;
+  border-radius: 20px;
+  background: #8140cb;
+  color: white;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.custom-plan {
+  margin-top: 30px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.custom-plan a {
+  color: #7942bd;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-left: 8px;
+}
+
+.pricing-disclaimer {
+  max-width: 650px;
+  margin: 15px auto 0;
+  text-align: center;
+  color: #978a9e;
+  font-size: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   13. SEÇÃO PERGUNTAS FREQUENTES (FAQ)
+   -------------------------------------------------------------------------- */
+.faq-section {
+  background: #faf8fc;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 90px;
+}
+
+.faq-grid .section-intro {
+  max-width: 370px;
+}
+
+.faq-list details {
+  border-top: 1px solid #e0d6eb;
+}
+
+.faq-list details:last-child {
+  border-bottom: 1px solid #e0d6eb;
+}
+
+.faq-list summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 25px 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list summary > span::before {
+  content: '+';
+  color: var(--purple);
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.faq-list details[open] summary > span::before {
+  content: '−';
+}
+
+.faq-list p {
+  padding: 0 20px 25px 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   14. SEÇÃO DE CONTATO / FORMULÁRIO DE DEMONSTRAÇÃO
+   -------------------------------------------------------------------------- */
+.contact-section {
+  padding-block: 78px;
+}
+
+.contact-panel {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 70px;
+  background: var(--purple-dark);
+  padding: 51px;
+  border-radius: 29px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -230px;
+  left: 20%;
+  width: 500px;
+  height: 500px;
+  border: 1px solid #ffffff09;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.contact-copy {
+  position: relative;
+  z-index: 1;
+  padding-top: 14px;
+}
+
+.contact-copy .eyebrow {
+  color: var(--yellow);
+  font-size: 9px;
+  letter-spacing: 1.7px;
+}
+
+.contact-copy h2 {
+  font-size: 43px;
+  letter-spacing: -1.8px;
+}
+
+.contact-copy > p:not(.eyebrow) {
+  max-width: 340px;
+  color: #c9b8dc;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 21px;
+}
+
+.contact-copy > .contact-call {
+  font-size: 12px !important;
+}
+
+/* Formulário de demonstração */
+.demo-form {
+  position: relative;
+  z-index: 1;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-field {
+  margin-bottom: 14px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 6px;
+  color: #d8c9e6;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #62427d;
+  border-radius: 7px;
+  background: #32194f;
+  padding: 10px 12px;
+  color: white;
+  font-size: 12px;
+}
+
+.form-field input::placeholder {
+  color: #b8a2c9;
+  opacity: 1;
+}
+
+.form-field select {
+  color-scheme: dark;
+}
+
+.form-field select option {
+  background: var(--purple-dark);
+}
+
+.form-field input:focus-visible,
+.form-field select:focus-visible {
+  outline-color: var(--yellow);
+  outline-offset: 2px;
+}
+
+.form-submit {
+  width: 100%;
+  min-height: 49px;
+  margin-top: 4px;
+}
+
+.form-help {
+  max-width: 400px;
+  margin: 12px auto 0;
+  text-align: center;
+  font-size: 10px;
+  color: #bfaccf;
+  line-height: 1.7;
+}
+
+.form-status:not(:empty) {
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid #806290;
+  border-radius: 7px;
+  font-size: 12px;
+  color: #fff1a0;
+}
+
+.form-status.success {
+  color: #d0f4d8;
+}
+
+.demo-form noscript p {
+  color: var(--yellow);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   15. RODAPÉ DO SITE (Footer)
+   -------------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid #eee7f6;
+  padding: 34px 0 18px;
+}
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding-bottom: 32px;
+}
+
+.footer-brand p {
+  font-size: 15px;
+  color: #7d678e;
+  margin-top: 4px;
+}
+
+.footer-main nav {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #8e7d9d;
+  font-size: 12px;
+}
+
+.footer-main nav a:hover {
+  color: var(--purple);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 18px;
+  border-top: 1px solid #f1edf7;
+  color: #a195ac;
+  font-size: 10px;
+}
+
+.footer-bottom span {
+  color: var(--purple);
+  margin-right: 5px;
+}
+
+/* --------------------------------------------------------------------------
+   16. DIÁLOGO / MODAL DE RESUMO DA SOLICITAÇÃO
+   -------------------------------------------------------------------------- */
+.request-dialog {
+  width: min(610px, calc(100% - 32px));
+  max-height: 90dvh;
+  padding: 34px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: var(--ink);
+  box-shadow: 0 20px 90px #26104633;
+}
+
+.request-dialog::backdrop {
+  background: #1a0a30a6;
+  backdrop-filter: blur(3px);
+}
+
+.dialog-close {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 26px;
+}
+
+.request-dialog .eyebrow {
+  padding-right: 25px;
+  font-size: 10px;
+}
+
+.request-dialog h2 {
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.request-dialog > p:not(.eyebrow) {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 15px;
+}
+
+.request-dialog > label {
+  display: block;
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.request-dialog textarea {
+  width: 100%;
+  min-height: 250px;
+  margin-top: 6px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.dialog-actions .button {
+  font-size: 12px;
+  padding: 11px 15px;
+}
+
+.request-dialog .dialog-status {
+  min-height: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   17. RESPONSIVIDADE (MEDIA QUERIES)
+   -------------------------------------------------------------------------- */
+
+/* Tela Extra Grande (Telas acima de 1600px) */
+@media (min-width: 1600px) {
+  .hero-grid {
+    min-height: 720px;
+  }
+}
+
+/* Notebooks e Telas Médias (Até 1100px) */
+@media (max-width: 1100px) {
+  .container {
+    width: calc(100% - 64px);
+  }
+
+  .navigation {
+    gap: 17px;
+    font-size: 12px;
+  }
+
+  .hero-grid {
+    gap: 28px;
+  }
+
+  .hero h1 {
+    font-size: 49px;
+  }
+
+  .hero-actions {
+    gap: 10px;
+  }
+
+  .hero-actions .button {
+    padding: 12px 14px;
+    font-size: 11px;
+    gap: 10px;
+  }
+
+  .how-grid {
+    gap: 40px;
+  }
+
+  .faq-grid {
+    gap: 50px;
+  }
+
+  .contact-panel {
+    padding: 40px;
+    gap: 45px;
+  }
+
+  .plan-card {
+    padding: 25px 20px;
+  }
+
+  .recommended {
+    padding: 24px 19px;
+  }
+
+  .ai-inner h2 {
+    font-size: 21px;
+  }
+
+  .ai-plan {
+    font-size: 9px;
+  }
+
+  .audience-inner > span {
+    font-size: 12px;
+  }
+}
+
+/* Tablets (Até 860px) */
+@media (max-width: 860px) {
+  html {
+    scroll-padding-top: 90px;
+  }
+
+  .section {
+    padding-block: 72px;
+  }
+
+  /* Cabeçalho mobile */
+  .header-inner {
+    min-height: 74px;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .brand img {
+    width: 114px;
+    height: 40px;
+  }
+
+  .navigation {
+    width: 100%;
+    padding-block: 10px 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .js .navigation {
+    display: none;
+  }
+
+  .js .navigation.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .js .navigation.is-open a {
+    padding: 13px;
+  }
+
+  .js .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 43px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 8px 12px;
+    background: white;
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  .menu-bars,
+  .menu-bars::before,
+  .menu-bars::after {
+    display: block;
+    width: 15px;
+    height: 1.5px;
+    background: var(--purple-dark);
+  }
+
+  .menu-bars {
+    position: relative;
+  }
+
+  .menu-bars::before,
+  .menu-bars::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-bars::before {
+    top: -5px;
+  }
+
+  .menu-bars::after {
+    top: 5px;
+  }
+
+  /* Hero no tablet */
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    padding-block: 58px;
+    gap: 24px;
+    min-height: 560px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    letter-spacing: -2px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+  }
+
+  .hero .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 245px;
+  }
+
+  /* Mockup no tablet */
+  .product-sticker {
+    font-size: 8px;
+    padding: 8px;
+  }
+
+  .product-preview {
+    height: 330px;
+  }
+
+  .preview-sidebar {
+    display: none;
+  }
+
+  .preview-content {
+    padding: 18px 12px;
+  }
+
+  .preview-heading h2 {
+    font-size: 12px;
+  }
+
+  .preview-metrics small {
+    font-size: 6px;
+  }
+
+  .preview-metrics strong {
+    font-size: 16px;
+  }
+
+  .control-note {
+    left: -10px;
+    padding: 12px;
+  }
+
+  .control-note strong {
+    font-size: 9px;
+  }
+
+  .control-note div > span {
+    font-size: 8px;
+  }
+
+  .preview-caption {
+    width: 75%;
+    bottom: 0;
+    font-size: 7px;
+  }
+
+  .network-line {
+    font-size: 10px;
+  }
+
+  /* Outras seções no tablet */
+  .audience-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-block: 22px;
+    gap: 16px 28px;
+  }
+
+  .audience p br {
+    display: none;
+  }
+
+  .feature-grid {
+    gap: 15px;
+  }
+
+  .feature-card {
+    padding: 22px 18px;
+  }
+
+  .feature-card h3 {
+    font-size: 18px;
+  }
+
+  .feature-card > p {
+    font-size: 13px;
+  }
+
+  .how-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .how-grid > div:first-child {
+    max-width: 590px;
+  }
+
+  .connection-card {
+    max-width: 620px;
+    width: 100%;
+  }
+
+  .ai-inner {
+    flex-wrap: wrap;
+    gap: 17px;
+  }
+
+  .ai-inner > div {
+    flex: 1;
+  }
+
+  .ai-plan {
+    margin-left: 71px;
+  }
+
+  .ai-inner h2 {
+    font-size: 20px;
+  }
+
+  .plan-card {
+    padding: 24px 16px;
+  }
+
+  .recommended {
+    padding: 23px 15px;
+  }
+
+  .pricing-grid {
+    gap: 15px;
+  }
+
+  .price strong {
+    font-size: 33px;
+  }
+
+  .price .currency {
+    font-size: 14px;
+    padding-top: 6px;
+  }
+
+  .price {
+    gap: 3px;
+  }
+
+  .price-unit {
+    font-size: 9px !important;
+  }
+
+  .price.quote strong {
+    font-size: 23px;
+  }
+
+  .plan-card > .button {
+    font-size: 10px;
+    padding: 10px 7px;
+  }
+
+  .plan-features li {
+    font-size: 11px;
+  }
+
+  .faq-grid {
+    gap: 35px;
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+
+  .contact-panel {
+    grid-template-columns: 1fr 1.1fr;
+    padding: 32px;
+    gap: 30px;
+  }
+
+  .contact-copy h2 {
+    font-size: 35px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+  }
+
+  .footer-main nav {
+    gap: 18px;
+  }
+}
+
+/* Celulares (Até 640px) */
+@media (max-width: 640px) {
+  .container {
+    width: calc(100% - 40px);
+  }
+
+  .section {
+    padding-block: 60px;
+  }
+
+  .section h2 {
+    font-size: 35px;
+    letter-spacing: -1.5px;
+  }
+
+  .section-intro {
+    font-size: 15px;
+    margin-top: 18px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.6px;
+    margin-bottom: 16px;
+  }
+
+  /* Hero em celulares */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 43px;
+    padding-bottom: 43px;
+  }
+
+  .hero .eyebrow {
+    font-size: 9px;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 10.6vw, 64px);
+    letter-spacing: -2.5px;
+  }
+
+  .hero-description {
+    max-width: 440px;
+    font-size: 16px;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    max-width: none;
+    gap: 10px;
+  }
+
+  .hero-actions .button {
+    flex: 1 1 auto;
+    min-height: 48px;
+    font-size: 12px;
+    padding-inline: 12px;
+    gap: 12px;
+  }
+
+  .network-line {
+    font-size: 11px;
+  }
+
+  /* Mockup em celulares */
+  .product-composition {
+    padding-top: 28px;
+    padding-bottom: 52px;
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .product-sticker {
+    font-size: 10px;
+    padding: 8px 12px;
+    right: 10px;
+  }
+
+  .product-preview {
+    height: 340px;
+  }
+
+  .preview-sidebar {
+    display: flex;
+    flex-basis: 64px;
+    font-size: 7px;
+  }
+
+  .preview-content {
+    padding-top: 20px;
+  }
+
+  .preview-heading h2 {
+    font-size: 12px;
+  }
+
+  .preview-heading p {
+    font-size: 7px;
+  }
+
+  .control-note {
+    left: 9px;
+    bottom: 33px;
+    padding: 12px;
+  }
+
+  .control-note strong {
+    font-size: 10px;
+  }
+
+  .control-note div > span {
+    font-size: 8px;
+  }
+
+  .preview-caption {
+    bottom: 0;
+    width: 100%;
+    font-size: 8px;
+  }
+
+  /* Seção público-alvo em celular */
+  .audience-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 14px;
+  }
+
+  .audience p {
+    grid-column: 1 / -1;
+    font-size: 12px;
+  }
+
+  .audience-inner > span {
+    font-size: 11px;
+    gap: 9px;
+  }
+
+  .audience-inner > span:last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Recursos e benefícios em celular */
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .feature-card {
+    padding: 26px;
+  }
+
+  .feature-icon {
+    margin-bottom: 17px;
+  }
+
+  .feature-card h3 {
+    font-size: 21px;
+  }
+
+  .feature-card > p {
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+
+  .feature-tag {
+    font-size: 9px;
+  }
+
+  .footnote {
+    font-size: 10px;
+  }
+
+  .how-grid {
+    gap: 34px;
+  }
+
+  .connection-card {
+    padding: 23px 19px;
+    border-radius: 18px;
+  }
+
+  .connection-heading h3 {
+    font-size: 15px;
+  }
+
+  .connection-heading > span {
+    font-size: 7px;
+  }
+
+  .network-cards {
+    gap: 8px;
+  }
+
+  .network-cards > div {
+    padding: 18px 4px;
+  }
+
+  .network-cards strong {
+    font-size: 11px;
+  }
+
+  .network-cards span {
+    font-size: 8px;
+  }
+
+  .review-message {
+    padding: 13px;
+  }
+
+  .review-message p {
+    font-size: 9px;
+  }
+
+  .ai-strip {
+    padding-block: 30px;
+  }
+
+  .sparkle {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 21px;
+  }
+
+  .ai-inner {
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .ai-inner h2 {
+    font-size: 18px;
+    line-height: 1.4;
+    letter-spacing: -0.4px;
+  }
+
+  .ai-inner p {
+    font-size: 12px;
+  }
+
+  .ai-plan {
+    margin-left: 56px;
+    font-size: 9px;
+  }
+
+  .section-center .section-intro br {
+    display: none;
+  }
+
+  /* Tabela de preços em celular */
+  .pricing-controls {
+    gap: 13px;
+    flex-wrap: wrap;
+  }
+
+  .control-group {
+    gap: 7px;
+  }
+
+  .control-group > span {
+    font-size: 10px;
+  }
+
+  .segmented button {
+    font-size: 10px;
+    padding: 9px 12px;
+    min-height: 38px;
+  }
+
+  .pricing-note {
+    font-size: 10px;
+    margin-top: 16px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 26px;
+  }
+
+  .plan-card {
+    padding: 28px;
+  }
+
+  .recommended {
+    padding: 27px;
+  }
+
+  .plan-card h3 {
+    font-size: 24px;
+  }
+
+  .plan-description {
+    min-height: auto;
+    font-size: 14px;
+  }
+
+  .plan-description br {
+    display: none;
+  }
+
+  .price {
+    margin-top: 22px;
+    gap: 7px;
+  }
+
+  .price strong {
+    font-size: 48px;
+  }
+
+  .price .currency {
+    font-size: 18px;
+    padding-top: 10px;
+  }
+
+  .price .price-unit {
+    font-size: 12px !important;
+  }
+
+  .price.quote strong {
+    font-size: 32px;
+  }
+
+  .price-detail {
+    font-size: 11px;
+    min-height: 22px;
+  }
+
+  .plan-card > .button {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+
+  .plan-features li {
+    font-size: 13px;
+  }
+
+  .plan-features > p {
+    font-size: 11px;
+  }
+
+  .custom-plan {
+    font-size: 12px;
+  }
+
+  .custom-plan a {
+    display: inline-block;
+    margin-top: 7px;
+  }
+
+  .pricing-disclaimer {
+    font-size: 10px;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .faq-list summary {
+    font-size: 14px;
+    padding-block: 23px;
+  }
+
+  .faq-list p {
+    font-size: 13px;
+  }
+
+  /* Formulário de contato em celular */
+  .contact-panel {
+    grid-template-columns: 1fr;
+    padding: 30px 23px;
+    border-radius: 21px;
+    gap: 30px;
+  }
+
+  .contact-copy {
+    padding-top: 0;
+  }
+
+  .contact-copy h2 {
+    font-size: 39px;
+  }
+
+  .contact-copy > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-field label {
+    font-size: 11px;
+  }
+
+  .form-field input,
+  .form-field select {
+    font-size: 16px;
+    min-height: 48px;
+    padding: 10px;
+  }
+
+  .form-field input::placeholder {
+    font-size: 12px;
+  }
+
+  .form-field select {
+    font-size: 13px;
+  }
+
+  .form-help {
+    font-size: 10px;
+  }
+
+  .footer-main {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .footer-brand p {
+    font-size: 15px;
+  }
+
+  .footer-main nav {
+    font-size: 12px;
+    gap: 22px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 10px;
+  }
+
+  .request-dialog {
+    padding: 28px 22px;
+  }
+
+  .request-dialog h2 {
+    font-size: 27px;
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+  }
+
+  .dialog-actions .button {
+    width: 100%;
+  }
+}
+
+/* Celulares Pequenos (Até 370px) */
+@media (max-width: 370px) {
+  .container {
+    width: calc(100% - 30px);
+  }
+
+  .hero h1 {
+    font-size: 39px;
+  }
+
+  .hero .eyebrow {
+    font-size: 8px;
+  }
+
+  .preview-sidebar {
+    display: none;
+  }
+
+  .preview-heading h2 {
+    font-size: 13px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .connection-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .product-sticker {
+    font-size: 9px;
+  }
+
+  .contact-panel {
+    padding-inline: 20px;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .pricing-controls {
+    gap: 10px;
+  }
+
+  .control-group {
+    gap: 6px;
+  }
+
+  .segmented button {
+    padding-inline: 10px;
+  }
+}
+
+/* Acessibilidade: Usuários com preferência de redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .button:hover {
+    transform: none;
+  }
+}
+.hero-product-image {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.hero-product-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 97%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 97%,
+    transparent 100%
+  );
+}
+
+
+/* Suaviza o topo e a base da imagem */
+.hero-product-image {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 6%,
+    black 96%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 6%,
+    black 96%,
+    transparent 100%
+  );
+}
+
+/* Logo original: preserva a propor��o do PNG */
+.site-header .brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-header .brand img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 170px;
+  max-height: 64px;
+  object-fit: contain;
+}
+
+/* Remove a seta do bot�o do cabe�alho */
+.site-header [data-demo-link] > span[aria-hidden="true"] {
+  display: none;
+}
+
+/* Slogan acima do t�tulo principal */
+.hero .eyebrow {
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+  text-transform: none;
+  margin-bottom: 20px;
+}
+
+/* Chamada da faixa de p�blico-alvo */
+.audience .audience-label {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--purple-dark);
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 860px) {
+  .site-header .brand img {
+    max-width: 140px;
+    max-height: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero .eyebrow {
+    font-size: 16px;
+  }
+
+  .audience .audience-label {
+    font-size: 18px;
+  }
+}
+/* 1. Mesmo tamanho de fonte em toda a faixa de p�blico */
+.audience .audience-label,
+.audience .audience-inner > span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 2. Remove o ponto antes do slogan */
+.hero .eyebrow::before {
+  display: none;
+}
+
+/* 3. Oculta os dois bot�es da apresenta��o */
+.hero .hero-actions {
+  display: none;
+}
+
+/* 4. Destaque discreto para a frase das redes */
+.hero .network-line {
+  display: inline-block;
+  max-width: 100%;
+  margin-top: 26px;
+  padding: 10px 14px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+
+  color: var(--purple-dark);
+  background: rgba(144, 82, 221, 0.07);
+  border: 1px solid rgba(144, 82, 221, 0.12);
+  border-radius: 8px;
+}
+
+/* Mant�m os tamanhos iguais nas telas menores */
+@media (max-width: 1100px) {
+  .audience .audience-label,
+  .audience .audience-inner > span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .audience .audience-label,
+  .audience .audience-inner > span {
+    font-size: 11px;
+  }
+
+  .hero .network-line {
+    font-size: 13px;
+  }
+}
+/* Padroniza��o dos quatro t�tulos */
+:is(#a-grape, #como-funciona, #duvidas, #demonstracao) .eyebrow {
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+  text-transform: none;
+  margin-bottom: 20px;
+  color: var(--green);
+}
+
+/* Remove o ponto antes dos textos */
+:is(#a-grape, #como-funciona, #duvidas, #demonstracao) .eyebrow::before {
+  display: none;
+}
+
+/* Mant�m o amarelo na se��o de demonstra��o */
+#demonstracao .eyebrow {
+  color: var(--yellow);
+}
+
+/* Mesmo ajuste do slogan no celular */
+@media (max-width: 640px) {
+  :is(#a-grape, #como-funciona, #duvidas, #demonstracao) .eyebrow {
+    font-size: 16px;
+  }
+}
+
+/* Paleta oficial */
+:root {
+  --purple: #9052dd;
+  --purple-dark: #261046;
+  --green: #027a1e;
+  --yellow: #fff1a0;
+
+  --ink: var(--purple-dark);
+  --line: rgba(144, 82, 221, 0.18);
+  --surface: #f8f5fc;
+}
+
+/* Títulos das seções */
+:is(#a-grape, #como-funciona, #planos, #duvidas) .eyebrow {
+  color: var(--purple);
+}
+
+/* Slogan de abertura */
+.hero .eyebrow {
+  color: var(--green);
+}
+
+/* Área de contato */
+.contact-panel {
+  background: var(--purple-dark);
+}
+
+#demonstracao .eyebrow {
+  color: var(--yellow);
+}
+
+/* Ícones: fundos oficiais e desenhos brancos */
+.feature-icon.lilac {
+  background: var(--purple);
+  color: #ffffff;
+}
+
+.feature-icon.green {
+  background: var(--green);
+  color: #ffffff;
+}
+
+.feature-icon.yellow {
+  background: var(--yellow);
+  color: #ffffff;
+}
+
+.feature-icon svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+/* Melhora a leitura do branco sobre o amarelo */
+.feature-icon.yellow svg {
+  filter: drop-shadow(0 1px 1px rgba(38, 16, 70, 0.65));
+}
+
+/* Etiquetas dos cards */
+.feature-tag {
+  color: var(--purple-dark);
+  background: rgba(144, 82, 221, 0.08);
+}
+
+/* Seções com fundo suave */
+.how-section,
+.faq-section {
+  background: var(--surface);
+}
+
+/* Numeração das etapas */
+.step-number {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: #ffffff;
+}
+
+/* Confirmação dos vínculos */
+.review-message {
+  background: rgba(2, 122, 30, 0.08);
+  color: var(--green);
+}
+
+.check-circle {
+  background: var(--green);
+  color: #ffffff;
+}
+
+/* Faixa sobre inteligência artificial */
+.ai-strip {
+  background: var(--yellow);
+  border-color: rgba(38, 16, 70, 0.08);
+}
+
+.ai-inner h2,
+.ai-inner p {
+  color: var(--purple-dark);
+}
+
+.sparkle {
+  background: var(--purple);
+  color: #ffffff;
+}
+
+.ai-plan {
+  background: var(--purple-dark);
+  border-color: var(--purple-dark);
+  color: #ffffff;
+}
+
+/* Botões e destaque dos planos */
+.button-purple,
+.recommended-label {
+  background: var(--purple);
+  color: #ffffff;
+}
+
+.button-purple:hover,
+.button-dark:hover {
+  background: var(--purple-dark);
+}
+
+.button-yellow {
+  background: var(--yellow);
+  color: var(--purple-dark);
+}
+
+.button-yellow:hover {
+  background: var(--yellow);
+  box-shadow: 0 4px 14px rgba(255, 241, 160, 0.2);
+}
+
+.custom-plan a {
+  color: var(--purple);
+}
+
+.recommended {
+  border-color: var(--purple);
+  background: var(--surface);
+}
+
+/* Alinhamento das etapas */
+#como-funciona .steps {
+  gap: 26px;
+}
+
+#como-funciona .steps li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+
+#como-funciona .step-number {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1;
+}
+
+#como-funciona .steps h3 {
+  margin: 0;
+  line-height: 1.4;
+}
+
+#como-funciona .steps p {
+  margin: 6px 0 0;
+  line-height: 1.6;
+}
+
+/* Remove o selo */
+.ai-strip .ai-plan {
+  display: none;
+}
+
+/* Faixa roxa */
+.ai-strip {
+  background: var(--purple);
+  border-color: transparent;
+}
+
+.ai-strip .ai-inner h2 {
+  color: var(--yellow);
+}
+
+.ai-strip .ai-inner p {
+  color: #ffffff;
+}
+
+/* �cone amarelo com s�mbolo escuro para dar contraste */
+.ai-strip .sparkle {
+  background: var(--yellow);
+  color: var(--purple-dark);
+}
+.ai-strip .ai-inner h2 {
+  color: #ffffff;
+}
+
+.ai-strip .sparkle {
+  background: #ffffff;
+  color: #9052dd;
+}
+
+/* GRAPE CUSTOM PLANS V2 START */
+#planos .eyebrow {
+  font-size: clamp(24px, 2vw, 28px);
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -.4px;
+  text-transform: none;
+  margin-bottom: 14px;
+  color: var(--purple);
+}
+#planos .eyebrow::before { display: none; }
+#planos #pricing-title {
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1.3px;
+}
+#planos .section-intro { max-width: 980px; }
+#planos .pricing-controls { margin-top: 28px; justify-content: center; }
+#planos .pricing-controls .control-group { justify-content: center; gap: 0; }
+#planos .pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 42px;
+}
+#planos .plan-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 26px 22px;
+}
+#planos .recommended { padding: 25px 21px; }
+#planos .plan-card h3 { font-size: 22px; }
+#planos .plan-description { min-height: 50px; margin-top: 12px; }
+#planos .price { min-height: 54px; gap: 5px; }
+#planos .price strong { font-size: 38px; letter-spacing: -1.5px; }
+#planos .price .currency { font-size: 16px; padding-top: 8px; }
+#planos .price.quote strong { font-size: 25px; letter-spacing: -.7px; padding-top: 10px; }
+#planos .price-detail {
+  min-height: 44px;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+#planos .price-detail .pix-price { display: block; color: var(--green); }
+#planos .price-detail strong { font-weight: 700; }
+#planos .plan-card > .button {
+  min-height: 54px;
+  margin-top: 20px;
+  padding: 10px 12px;
+  gap: 8px;
+  font-size: 12px;
+}
+#planos .plan-features { margin-top: 24px; }
+#planos .plan-features > p { min-height: 36px; font-size: 11px; }
+#planos .plan-features li { font-size: 12px; }
+#planos .custom-card {
+  background: var(--purple-dark);
+  border-color: var(--purple-dark);
+  color: #fff;
+  justify-content: center;
+  padding: 34px 24px;
+}
+#planos .custom-card h3 { color: var(--yellow); margin-bottom: 26px; }
+#planos .custom-headline {
+  font-size: clamp(28px, 2.3vw, 34px);
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: #fff;
+}
+#planos .custom-description {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, .85);
+}
+#planos .custom-card > .button {
+  margin-top: 32px;
+  background: #fff;
+  border-color: #fff;
+  color: var(--purple-dark);
+}
+#planos .custom-card > .button:hover {
+  background: var(--yellow);
+  border-color: var(--yellow);
+}
+/* Aviso para leitores de tela ao alternar Mensal/Anual. */
+#planos #pricing-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 1199px) {
+  #planos .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 22px; }
+}
+@media (max-width: 640px) {
+  #planos .eyebrow { font-size: 24px; }
+  #planos .pricing-grid { grid-template-columns: minmax(0, 1fr); }
+  #planos .plan-card { padding: 28px; }
+  #planos .recommended { padding: 27px; }
+  #planos .plan-description { min-height: 0; }
+  #planos .price strong { font-size: 44px; }
+  #planos .price.quote strong { font-size: 29px; }
+  #planos .plan-features > p { min-height: 0; }
+  #planos .custom-card { padding: 36px 28px; }
+}
+/* GRAPE CUSTOM PLANS V2 END */
+
+/* Ajustes extraídos de index.html (movidos para cá para organização) */
+.site-footer .footer-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 28px;
+    padding-bottom: 32px;
+  }
+
+  /* Logo e slogan alinhados à esquerda */
+  .site-footer .footer-identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .site-footer .footer-identity > a {
+    display: inline-flex;
+  }
+
+  .site-footer .footer-identity img {
+    display: block;
+    width: 116px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .site-footer .footer-identity p {
+    margin: 0;
+    color: #261046;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* E-mail no centro do rodapé */
+  .site-footer .footer-email {
+    justify-self: center;
+    color: #74617f;
+    font-size: 12px;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .site-footer .footer-main nav {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+  }
+
+  .site-footer .footer-email:hover,
+  .site-footer .footer-main nav a:hover {
+    color: #9052dd;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* CNPJ à esquerda, direitos no centro e frase à direita */
+  .site-footer .footer-bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .site-footer .footer-bottom p {
+    margin: 0;
+  }
+
+  .site-footer .footer-cnpj {
+    text-align: left;
+  }
+
+  .site-footer .footer-copyright {
+    text-align: center;
+  }
+
+  .site-footer .footer-signature {
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .site-footer .footer-main,
+    .site-footer .footer-bottom {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 20px;
+    }
+
+    .site-footer .footer-identity {
+      align-items: center;
+      text-align: center;
+    }
+
+    .site-footer .footer-main nav {
+      justify-content: center;
+    }
+
+    .site-footer .footer-bottom p {
+      text-align: center;
+    }
+  }
+
+/* Alinhamento dos cards */
+  #planos .plan-card h3 {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  #planos .plan-description {
+    min-height: 50px;
+    margin-top: 12px;
+  }
+
+  #planos .price {
+    min-height: 60px;
+    margin-top: 16px;
+    align-items: center;
+  }
+
+  #planos .price-unit {
+    max-width: none;
+    white-space: nowrap;
+  }
+
+  #planos .price-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-height: 72px;
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  #planos[data-billing="annual"] .price-detail {
+    min-height: 124px;
+  }
+
+  #planos .plan-card > .button {
+    min-height: 54px;
+    margin-top: 20px;
+  }
+
+  /* Destaques do Pix */
+  #planos .saving-label {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 5px;
+    background: rgba(2, 122, 30, 0.08);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  #planos .pix-price {
+    display: block;
+    color: var(--green);
+    font-size: 13px;
+  }
+
+  #planos .pix-price strong {
+    font-weight: 700;
+  }
+
+  #planos .annual-total {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  #planos .annual-saving {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  #planos[data-billing="annual"] .saving-label {
+    margin-top: 3px;
+  }
+
+  /* Custom */
+  #planos .custom-card {
+    justify-content: flex-start;
+    padding: 26px 22px;
+    background: var(--purple-dark);
+    border-color: var(--purple-dark);
+  }
+
+  #planos .custom-card h3 {
+    color: var(--yellow);
+  }
+
+  #planos .custom-card .custom-message {
+    padding: 0;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 750;
+    line-height: 1.15;
+    letter-spacing: -0.6px;
+  }
+
+  #planos .custom-card .plan-description,
+  #planos .custom-card .price-detail {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  #planos .custom-offer {
+    color: var(--yellow);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  #planos .custom-offer strong {
+    font-weight: 700;
+  }
+
+  #planos .custom-card > .button {
+    margin-top: 20px;
+    background: #ffffff;
+    border-color: #ffffff;
+    color: var(--purple-dark);
+  }
+
+  #planos .custom-card > .button:hover {
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+
+  #planos .custom-card .plan-features {
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  #planos .custom-card .plan-features > p {
+    min-height: 36px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  #planos .custom-card .plan-features li {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+  }
+
+  #planos .custom-card .plan-features strong {
+    color: #ffffff;
+  }
+
+  #planos .custom-card .plan-features li::before {
+    color: var(--yellow);
+  }
+
+  @media (max-width: 640px) {
+    #planos .plan-description {
+      min-height: 0;
+    }
+
+    #planos .custom-card {
+      padding: 28px;
+    }
+
+    #planos .custom-card .plan-features > p {
+      min-height: 0;
+    }
+  }
+
+/* Professional: título e preço padrão em roxo */
+  #planos [data-plan-card="professional"] h3,
+  #planos [data-plan-card="professional"] .currency,
+  #planos [data-plan-card="professional"] [data-price],
+  #planos [data-plan-card="professional"] .price-unit,
+  #planos [data-plan-card="professional"] .annual-total {
+    color: #9052dd;
+  }
+
+  /* Mensal: valor no Pix e selo lado a lado */
+  #planos[data-billing="monthly"] [data-plan-card] .price-detail {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: flex-start;
+    justify-content: flex-start;
+    gap: 6px 8px;
+  }
+
+  #planos[data-billing="monthly"] [data-plan-card] .pix-price {
+    order: -1;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  #planos[data-billing="monthly"] [data-plan-card] .saving-label {
+    flex-shrink: 0;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  /* Anual: separar a economia padrão da oferta no Pix */
+  #planos[data-billing="annual"] [data-plan-card] .saving-label {
+    margin-top: 16px;
+  }
+
+.site-footer .footer-main .footer-brand {
+    order: 1;
+  }
+
+  .site-footer .footer-main nav {
+    order: 2;
+    justify-self: center;
+    justify-content: center;
+  }
+
+  .site-footer .footer-main .footer-email {
+    order: 3;
+    justify-self: end;
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .site-footer .footer-main .footer-email {
+      justify-self: center;
+      text-align: center;
+    }
+  }
