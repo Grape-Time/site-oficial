@@ -3000,7 +3000,7 @@ p {
   color: rgba(255, 255, 255, .85);
 }
 #planos .custom-card > .button {
-  margin-top: 32px;
+  margin-top: 100px;
   background: #fff;
   border-color: #fff;
   color: var(--purple-dark);
@@ -3698,3 +3698,23 @@ p {
       text-align: center;
     }
   }
+
+
+/* Alinhamento uniforme dos botoes Contratar dos planos */
+#planos .custom-offer {
+  margin-bottom: 24px;
+}
+
+#planos .plan-card {
+  display: flex;
+  flex-direction: column;
+}
+
+#planos .price-detail {
+  min-height: 52px !important;
+  margin-top: 8px;
+}
+
+#planos .plan-card > .button {
+  margin-top: auto !important;
+}
