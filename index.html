@@ -463,6 +463,31 @@
     margin-top: auto;
     min-height: 54px;
   }
+
+
+/* Mensal: Economize antes do valor no Pix */
+#planos[data-billing="monthly"] [data-plan-card] .saving-label {
+  order: 0;
+}
+
+#planos[data-billing="monthly"] [data-plan-card] .pix-price {
+  order: 1;
+}
+
+/* Anual: mesmo selo visual do mensal */
+#planos[data-billing="annual"] [data-plan-card] .annual-saving {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+
+#planos[data-billing="annual"] [data-plan-card]
+.annual-saving > .saving-label {
+  margin: 0;
+  flex-shrink: 0;
+}
+
 </style>
 
 <script>
@@ -474,32 +499,80 @@
       let quadro;
 
       function alinhar() {
-        const blocos = [
-          ...grade.querySelectorAll(
-            ":scope > .plan-card > .plan-features"
-          )
-        ];
+  /* Separa o selo Economize do valor da economia anual */
+  grade.querySelectorAll(".annual-saving").forEach(linha => {
+    if (linha.querySelector(".saving-label")) return;
 
-        if (!blocos.length) return;
+    const texto = linha.textContent.trim();
+    if (!texto.startsWith("Economize")) return;
 
-        /* Mede a altura natural das listas */
-        blocos.forEach(bloco => {
-          bloco.style.minHeight = "0px";
-        });
+    const selo = document.createElement("span");
+    selo.className = "saving-label";
+    selo.textContent = "Economize";
 
-        const altura = Math.ceil(
-          Math.max(
-            ...blocos.map(bloco =>
-              bloco.getBoundingClientRect().height
-            )
-          )
-        );
+    const valor = document.createElement("span");
+    valor.textContent = texto.slice("Economize".length).trim();
 
-        /* Reserva a mesma altura abaixo de cada botão */
-        blocos.forEach(bloco => {
-          bloco.style.minHeight = altura + "px";
-        });
-      }
+    linha.replaceChildren(selo, valor);
+  });
+
+  /* Alinha a proposta do Custom às informações de pagamento */
+  const custom = grade.querySelector(".custom-card");
+  const detalheCustom = custom?.querySelector(".price-detail");
+
+  if (detalheCustom) {
+    detalheCustom.style.marginTop = "10px";
+
+    const posicoes = [
+      ...grade.querySelectorAll("[data-plan-card]")
+    ].map(card => {
+      const detalhe = card.querySelector(".price-detail");
+
+      return detalhe
+        ? detalhe.getBoundingClientRect().top
+          - card.getBoundingClientRect().top
+        : null;
+    }).filter(posicao => posicao !== null);
+
+    if (posicoes.length) {
+      const atual =
+        detalheCustom.getBoundingClientRect().top
+        - custom.getBoundingClientRect().top;
+
+      const margem = Math.max(
+        10,
+        10 + Math.max(...posicoes) - atual
+      );
+
+      detalheCustom.style.marginTop = margem + "px";
+    }
+  }
+
+  /* Mantém os botões de contratação alinhados */
+  const blocos = [
+    ...grade.querySelectorAll(
+      ":scope > .plan-card > .plan-features"
+    )
+  ];
+
+  if (!blocos.length) return;
+
+  blocos.forEach(bloco => {
+    bloco.style.minHeight = "0px";
+  });
+
+  const altura = Math.ceil(
+    Math.max(
+      ...blocos.map(bloco =>
+        bloco.getBoundingClientRect().height
+      )
+    )
+  );
+
+  blocos.forEach(bloco => {
+    bloco.style.minHeight = altura + "px";
+  });
+}
 
       function atualizar() {
         cancelAnimationFrame(quadro);
