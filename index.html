@@ -427,14 +427,17 @@
 
 
 <style>
-  /* Organiza o conteúdo dos cartões a partir do topo */
   #planos .pricing-grid > .plan-card {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
   }
 
-  /* Sobe “Personalize do seu jeito” e os textos abaixo */
+  #planos .pricing-grid > .plan-card > * {
+    flex-shrink: 0;
+  }
+
+  /* Mantém o conteúdo do Custom mais acima */
   #planos .pricing-grid > .custom-card > .plan-description {
     min-height: 0;
   }
@@ -450,60 +453,68 @@
     margin-top: 10px;
   }
 
+  /* Espaço mínimo entre o texto e o botão */
+  #planos .pricing-grid > .plan-card > .price-detail {
+    margin-bottom: 20px;
+  }
+
+  /* O espaço disponível fica acima dos botões */
   #planos .pricing-grid > .plan-card > .button {
-    margin-top: 20px;
-    flex-shrink: 0;
+    margin-top: auto;
+    min-height: 54px;
   }
 </style>
 
 <script>
   (() => {
-    function iniciarAlinhamento() {
-      const secao = document.getElementById("planos");
-      const grade = secao?.querySelector(".pricing-grid");
-
-      if (!grade || grade.dataset.botoesAlinhados === "true") return;
-      grade.dataset.botoesAlinhados = "true";
+    function iniciar() {
+      const grade = document.querySelector("#planos .pricing-grid");
+      if (!grade) return;
 
       let quadro;
 
-      function alinharBotoes() {
-        const itens = [...grade.querySelectorAll(":scope > .plan-card")]
-          .map(card => ({
-            card,
-            botao: card.querySelector(":scope > .button")
-          }))
-          .filter(item => item.botao);
+      function alinhar() {
+        const blocos = [
+          ...grade.querySelectorAll(
+            ":scope > .plan-card > .plan-features"
+          )
+        ];
 
-        if (!itens.length) return;
+        if (!blocos.length) return;
 
-        /* Remove o espaçamento calculado anteriormente */
-        itens.forEach(({ botao }) => {
-          botao.style.marginTop = "20px";
+        /* Mede a altura natural das listas */
+        blocos.forEach(bloco => {
+          bloco.style.minHeight = "0px";
         });
 
-        /* Mede cada botão em relação ao próprio cartão */
-        const posicoes = itens.map(({ card, botao }) =>
-          botao.offsetTop + card.clientTop
+        const altura = Math.ceil(
+          Math.max(
+            ...blocos.map(bloco =>
+              bloco.getBoundingClientRect().height
+            )
+          )
         );
 
-        const posicaoComum = Math.max(...posicoes);
-
-        itens.forEach(({ botao }, indice) => {
-          const espaco = 20 + posicaoComum - posicoes[indice];
-          botao.style.marginTop = `${espaco}px`;
+        /* Reserva a mesma altura abaixo de cada botão */
+        blocos.forEach(bloco => {
+          bloco.style.minHeight = altura + "px";
         });
       }
 
       function atualizar() {
         cancelAnimationFrame(quadro);
-        quadro = requestAnimationFrame(alinharBotoes);
+        quadro = requestAnimationFrame(alinhar);
       }
 
-      window.addEventListener("resize", atualizar, { passive: true });
+      /* Acompanha a criação do Custom e a troca de preços */
+      new MutationObserver(atualizar).observe(grade, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
 
-      secao.querySelectorAll("[data-period]").forEach(botao => {
-        botao.addEventListener("click", atualizar);
+      window.addEventListener("resize", atualizar, {
+        passive: true
       });
 
       if (document.fonts) {
@@ -514,13 +525,11 @@
     }
 
     if (document.readyState === "loading") {
-      document.addEventListener(
-        "DOMContentLoaded",
-        iniciarAlinhamento,
-        { once: true }
-      );
+      document.addEventListener("DOMContentLoaded", iniciar, {
+        once: true
+      });
     } else {
-      iniciarAlinhamento();
+      iniciar();
     }
   })();
 </script>
