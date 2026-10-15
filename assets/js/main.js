@@ -631,3 +631,316 @@
     ajustarTextosDoSite();
   }
 })();
+
+/* Ajustes extraídos de index.html */
+(() => {
+  function atualizarPlanos() {
+    const section = document.querySelector('#planos');
+    const config = window.GRAPE_CONFIG;
+
+    if (!section || !config?.prices) return;
+    if (section.dataset.pricingPolishReady === 'true') return;
+
+    section.dataset.pricingPolishReady = 'true';
+
+    /* Valores confirmados na referência */
+    const valores = {
+      essential: {
+        monthly: { standard: 679, pix: 615 },
+        annual: { standard: 6828, pix: 6490 }
+      },
+      professional: {
+        monthly: { standard: 1259, pix: 1139 },
+        annual: { standard: 12588, pix: 11950 }
+      },
+      enterprise: {
+        monthly: { standard: 5870, pix: 5290 },
+        annual: { standard: 56280, pix: 53500 }
+      }
+    };
+
+    Object.entries(valores).forEach(([plano, precos]) => {
+      config.prices[plano] = {
+        ...config.prices[plano],
+        monthly: { ...precos.monthly },
+        annual: { ...precos.annual }
+      };
+    });
+
+    /* Recursos do Enterprise */
+    const enterprise = section.querySelector(
+      '[data-plan-card="enterprise"] .plan-features ul'
+    );
+
+    if (enterprise) {
+      enterprise.innerHTML = `
+        <li>Até <strong>5.000 perfis/mês</strong></li>
+        <li><strong>Usuários ilimitados</strong></li>
+        <li><strong>Campanhas ilimitadas</strong></li>
+        <li>Suporte prioritário</li>
+        <li><strong>Dashboard de produtividade</strong></li>
+      `;
+    }
+
+    /* Estrutura e recursos do Custom */
+    const custom = section.querySelector('.custom-card');
+
+    if (custom) {
+      custom.removeAttribute('data-plan-card');
+      custom.setAttribute('aria-labelledby', 'custom-plan-title');
+
+      custom.innerHTML = `
+        <h3 id="custom-plan-title">Custom</h3>
+
+        <p class="plan-description">
+          De acordo com sua necessidade
+        </p>
+
+        <div class="price">
+          <strong class="custom-message">
+            Personalize do seu jeito
+          </strong>
+        </div>
+
+        <p class="price-detail">
+          <span>Proposta sob consulta</span>
+          <span class="custom-offer">
+            <strong>5% de desconto</strong>
+            para volumes acima de 6.000 perfis
+          </span>
+        </p>
+
+        <a
+          class="button button-outline"
+          href="#demonstracao"
+          data-plan="custom"
+        >
+          Contratar Custom
+        </a>
+
+        <div class="plan-features">
+          <p>Configure os recursos do seu plano</p>
+          <ul>
+            <li>Defina a quantidade de <strong>perfis</strong></li>
+            <li>Defina a quantidade de <strong>usuários</strong></li>
+            <li><strong>Campanhas ilimitadas</strong></li>
+            <li>Opção de <strong>dashboard</strong></li>
+          </ul>
+        </div>
+      `;
+
+      const interest = document.querySelector('#interest');
+
+      if (interest && !interest.querySelector('option[value="custom"]')) {
+        const option = document.createElement('option');
+        option.value = 'custom';
+        option.textContent = 'Custom — plano sob medida';
+        interest.append(option);
+      }
+
+      custom.querySelector('[data-plan="custom"]')
+        .addEventListener('click', () => {
+          if (!interest) return;
+
+          interest.value = 'custom';
+          interest.dispatchEvent(
+            new Event('change', { bubbles: true })
+          );
+        });
+    }
+
+    const moeda = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+
+    const numero = new Intl.NumberFormat('pt-BR', {
+      maximumFractionDigits: 2
+    });
+
+    function exibirPrecos() {
+      const selecionado = section.querySelector(
+        '[data-period][aria-pressed="true"]'
+      );
+
+      const periodo = selecionado?.dataset.period || 'monthly';
+      const anual = periodo === 'annual';
+
+      section.dataset.billing = periodo;
+
+      section.querySelectorAll('[data-plan-card]').forEach(card => {
+        const plano = card.dataset.planCard;
+        const precos = config.prices[plano];
+
+        if (!precos) return;
+
+        const detalhe = card.querySelector('.price-detail');
+        const destaque = card.querySelector('[data-price]');
+        const unidade = card.querySelector('.price-unit');
+        const currency = card.querySelector('.currency');
+        const price = card.querySelector('.price');
+
+        if (!detalhe || !destaque || !unidade || !currency || !price) {
+          return;
+        }
+
+        const atual = precos[periodo];
+
+        price.classList.remove('quote');
+        currency.hidden = false;
+        unidade.hidden = false;
+        unidade.textContent = '/mês';
+
+        destaque.textContent = numero.format(
+          anual ? atual.standard / 12 : atual.standard
+        );
+
+        price.title = anual
+          ? `Equivalente mensal do plano anual de ${moeda.format(atual.standard)}`
+          : '';
+
+        if (anual) {
+          const economia =
+            precos.monthly.standard * 12 - atual.standard;
+
+          detalhe.innerHTML = `
+            <span class="annual-total">
+              ${moeda.format(atual.standard)}/ano
+            </span>
+
+            <span class="annual-saving">
+              Economize ${moeda.format(economia)}/ano no padrão
+            </span>
+
+            <span class="saving-label">
+              Economize ainda mais
+            </span>
+
+            <span class="pix-price">
+              <strong>${moeda.format(atual.pix)}</strong>/ano no Pix
+            </span>
+          `;
+        } else {
+          detalhe.innerHTML = `
+            <span class="saving-label">
+              Economize
+            </span>
+
+            <span class="pix-price">
+              <strong>${moeda.format(atual.pix)}</strong>/mês no Pix
+            </span>
+          `;
+        }
+      });
+    }
+
+    /* Atualiza depois da lógica de preços existente */
+    section.querySelectorAll('[data-period]').forEach(botao => {
+      botao.addEventListener('click', exibirPrecos);
+    });
+
+    const botaoAtual = section.querySelector(
+      '[data-period][aria-pressed="true"]'
+    ) || section.querySelector('[data-period="monthly"]');
+
+    if (botaoAtual) {
+      botaoAtual.click();
+    } else {
+      exibirPrecos();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      atualizarPlanos,
+      { once: true }
+    );
+  } else {
+    atualizarPlanos();
+  }
+})();
+
+(() => {
+  function aplicarAjustes() {
+    const enterprise = document.querySelector(
+      '#planos [data-plan-card="enterprise"]'
+    );
+
+    if (!enterprise) return;
+
+    const descricao = enterprise.querySelector('.plan-description');
+
+    if (descricao) {
+      descricao.textContent = 'Para grandes agências e marcas';
+    }
+
+    enterprise.querySelectorAll('.plan-features li').forEach(item => {
+      if (item.textContent.trim() === 'Suporte prioritário') {
+        const destaque = document.createElement('strong');
+        destaque.textContent = 'Suporte prioritário';
+        item.replaceChildren(destaque);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', aplicarAjustes, {
+      once: true
+    });
+  } else {
+    aplicarAjustes();
+  }
+})();
+
+(() => {
+  function ajustarTextosDoSite() {
+    // Título das perguntas frequentes
+    const tituloFaq = document.querySelector('#faq-title');
+
+    if (tituloFaq) {
+      tituloFaq.innerHTML = 'Antes de dar<br>o próximo passo';
+    }
+
+    // Título do formulário
+    const tituloContato = document.querySelector('#contact-title');
+
+    if (tituloContato) {
+      tituloContato.innerHTML =
+        'Mais tempo para<br>o que só você<br>sabe fazer';
+    }
+
+    // Texto do botão
+    const textoBotao = document.querySelector('#submit-label');
+
+    if (textoBotao) {
+      textoBotao.textContent = 'Enviar Solicitação';
+    }
+
+    // Remover a seta do botão
+    document.querySelectorAll(
+      '#demo-form .form-submit [aria-hidden="true"]'
+    ).forEach(seta => seta.remove());
+
+    // Simplificar o nome do plano no formulário
+    const opcaoCustom = document.querySelector(
+      '#interest option[value="custom"]'
+    );
+
+    if (opcaoCustom) {
+      opcaoCustom.textContent = 'Custom';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      ajustarTextosDoSite,
+      { once: true }
+    );
+  } else {
+    ajustarTextosDoSite();
+  }
+})();
