@@ -129,13 +129,30 @@
           <p class="section-intro">A familiaridade do Google Sheets com uma camada de automação para o trabalho de curadoria.</p>
           <!-- #Lista de passos (01, 02, 03) -->
           <ol class="steps">
-            <!-- #Passo 01: Informe o perfil -->
-            <li><span class="step-number">01</span><div><h3>Informe o perfil.</h3><p>Comece pelo link ou @ do creator que deseja mapear.</p></div></li>
-            <!-- #Passo 02: Confirme as conexões -->
-            <li><span class="step-number">02</span><div><h3>Confirme as conexões.</h3><p>Revise os vínculos sugeridos entre as redes antes de confirmar a identidade do creator.</p></div></li>
-            <!-- #Passo 03: Organize e acompanhe -->
-            <li><span class="step-number">03</span><div><h3>Organize e acompanhe.</h3><p>Use os dados na curadoria e mantenha o trabalho conectado à campanha.</p></div></li>
-          </ol>
+  <li>
+    <span class="step-number">01</span>
+    <div>
+      <h3>Informe o perfil</h3>
+      <p>Comece pelo link ou @ do creator que deseja mapear</p>
+    </div>
+  </li>
+
+  <li>
+    <span class="step-number">02</span>
+    <div>
+      <h3>Confirme as conexões</h3>
+      <p>Revise os vínculos sugeridos entre as redes antes de confirmar a identidade do creator</p>
+    </div>
+  </li>
+
+  <li>
+    <span class="step-number">03</span>
+    <div>
+      <h3>Organize e acompanhe</h3>
+      <p>Use os dados na curadoria e mantenha o trabalho conectado à campanha</p>
+    </div>
+  </li>
+</ol>
         </div>
         <!-- #Card ilustrativo de conexões de um creator -->
         <div class="connection-card">
@@ -158,7 +175,10 @@
 
     <!-- #Faixa de apoio da IA (ai-strip) -->
     <section class="ai-strip" aria-label="Inteligência artificial na curadoria">
-      <div class="container ai-inner"><span class="sparkle" aria-hidden="true">✦</span><div><h2>Inteligência para apoiar. Não para decidir por você.</h2><p>Recursos de IA para apoiar a curadoria, mantendo o olhar crítico e a revisão humana no processo.</p></div><span class="ai-plan">A partir do Professional</span></div>
+      <div class="container ai-inner"><span class="sparkle" aria-hidden="true">✦</span><div><h2>
+  Inteligência para apoiar.
+  <span class="ai-mobile-line">Não para decidir por você.</span>
+</h2><p>Recursos de IA para apoiar a curadoria, mantendo o olhar crítico e a revisão humana no processo.</p></div><span class="ai-plan">A partir do Professional</span></div>
     </section>
 
     <!-- #Seção Planos e preços (id=planos) -->
@@ -558,6 +578,35 @@
 
     .audience .audience-inner > span:nth-child(4) {
       order: 2;
+    }
+  }
+</style>
+
+<style>
+  .ai-strip .ai-mobile-line {
+    display: inline;
+  }
+
+  @media (max-width: 640px) {
+    /* Aproxima o título da descrição em cada passo */
+    #como-funciona .steps li > div {
+      gap: 0;
+    }
+
+    #como-funciona .steps h3 {
+      min-height: 0;
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    #como-funciona .steps p {
+      margin: 3px 0 0;
+      line-height: 1.55;
+    }
+
+    /* Quebra antes de “Não” somente no celular */
+    .ai-strip .ai-mobile-line {
+      display: block;
     }
   }
 </style>
