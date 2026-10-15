@@ -393,7 +393,7 @@
           <span>Proposta sob consulta</span>
           <span class="custom-offer">
             <strong>5% de desconto</strong>
-            para volumes acima de 6.000 perfis
+            para volumes acima de 5.000 perfis
           </span>
         </p>
 
@@ -700,7 +700,7 @@
           <span>Proposta sob consulta</span>
           <span class="custom-offer">
             <strong>5% de desconto</strong>
-            para volumes acima de 6.000 perfis
+            para volumes acima de 5.000 perfis
           </span>
         </p>
 
