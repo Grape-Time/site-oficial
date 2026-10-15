@@ -514,16 +514,8 @@
       }
 
       const navegacao = document.getElementById("navegacao");
-      const agendamento = navegacao?.querySelector("[data-demo-link]");
       const apresentacao = document.querySelector(".hero-grid");
       const faixaRedes = apresentacao?.querySelector(".network-line");
-
-      moverNoMobile(
-        agendamento,
-        navegacao,
-        window.matchMedia("(max-width: 860px)"),
-        true
-      );
 
       moverNoMobile(
         faixaRedes,
