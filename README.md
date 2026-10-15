@@ -31,7 +31,7 @@ Este pacote foi criado em um ambiente Linux, sem acesso direto ao disco `C:`. A 
 | `assets/js/config.js` | Preços, contato, agendamento e destinos oficiais |
 | `assets/js/main.js` | Menu, seletores de planos, formulário e resumo |
 | `assets/img/grape-logo.png` | Wordmark vetorial provisório reconstituído da prévia |
-| `assets/img/favicon.svg` | Ícone vetorial da página |
+| `assets/img/favicon.png` | Ícone da página |
 | `scripts/serve.mjs` | Servidor local opcional, usando apenas Node.js |
 | `scripts/build.mjs` | Cópia dos arquivos públicos para `dist` |
 | `docs/INTEGRACOES.md` | Campos pendentes e contrato do formulário |
