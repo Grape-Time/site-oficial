@@ -611,5 +611,51 @@
   }
 </style>
 
+<style>
+  @media (max-width: 640px) {
+    #planos .pricing-grid {
+      display: grid;
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: calc(100% - 24px);
+      gap: 16px;
+      align-items: stretch;
+
+      /* Rolagem horizontal com encaixe dos cartões */
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+
+      /* Espaço para o selo “Recomendado” e a barra */
+      padding: 18px 0 16px;
+
+      scrollbar-width: thin;
+      scrollbar-color: #9052dd #eee6f8;
+    }
+
+    #planos .pricing-grid > .plan-card {
+      min-width: 0;
+      width: auto;
+      margin: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    #planos .pricing-grid::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    #planos .pricing-grid::-webkit-scrollbar-track {
+      background: #eee6f8;
+      border-radius: 10px;
+    }
+
+    #planos .pricing-grid::-webkit-scrollbar-thumb {
+      background: #9052dd;
+      border-radius: 10px;
+    }
+  }
+</style>
+
 </body>
 </html>
