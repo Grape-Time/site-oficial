@@ -1211,6 +1211,8 @@ p {
   left: 50%;
   transform: translateX(-50%);
   padding: 6px 18px;
+  white-space: nowrap;
+  z-index: 2;
   border-radius: 20px;
   background: #8140cb;
   color: white;
@@ -1901,11 +1903,12 @@ p {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     gap: 16px;
+    padding-top: 20px;
     padding-bottom: 14px;
     scrollbar-width: none;
     -ms-overflow-style: none;
     cursor: grab;
-    touch-action: pan-x;
+    touch-action: auto;
     user-select: none;
   }
 
