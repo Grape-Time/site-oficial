@@ -3172,7 +3172,7 @@ p {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-    min-height: 72px;
+    min-height: auto;
     margin-top: 8px;
     font-size: 13px;
     line-height: 1.5;
@@ -3502,7 +3502,7 @@ p {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-    min-height: 72px;
+    min-height: auto;
     margin-top: 8px;
     font-size: 13px;
     line-height: 1.5;
