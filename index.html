@@ -348,5 +348,16 @@
   }
 </style>
 
+<style>
+  /* Reduz o espaço nos quatro cartões somente no anual */
+  #planos[data-billing="annual"] .plan-card .price-detail {
+    min-height: 64px;
+  }
+
+  #planos[data-billing="annual"] .plan-card > .button {
+    margin-top: 16px;
+  }
+</style>
+
 </body>
 </html>
