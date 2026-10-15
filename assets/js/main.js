@@ -500,7 +500,7 @@
             </span>
 
             <span class="annual-saving">
-              Economize ${moeda.format(economia)}/ano no padrão
+              Economize ${moeda.format(economia)}/ano
             </span>
           `;
         } else {
@@ -807,7 +807,7 @@
             </span>
 
             <span class="annual-saving">
-              Economize ${moeda.format(economia)}/ano no padrão
+              Economize ${moeda.format(economia)}/ano
             </span>
           `;
         } else {
