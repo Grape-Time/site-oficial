@@ -1704,6 +1704,16 @@ p {
     padding: 13px;
   }
 
+  #navegacao > [data-demo-link] {
+    align-self: flex-start;
+    width: fit-content;
+    max-width: 100%;
+    min-height: 44px;
+    margin: 0 0 8px;
+    padding: 11px 18px;
+    font-size: 12px;
+  }
+
   .js .menu-toggle {
     display: inline-flex;
     align-items: center;
