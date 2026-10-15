@@ -425,5 +425,106 @@
   }
 </style>
 
+
+<style>
+  /* Organiza o conteúdo dos cartões a partir do topo */
+  #planos .pricing-grid > .plan-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Sobe “Personalize do seu jeito” e os textos abaixo */
+  #planos .pricing-grid > .custom-card > .plan-description {
+    min-height: 0;
+  }
+
+  #planos .pricing-grid > .custom-card > .price {
+    min-height: 0;
+    margin-top: 16px;
+    align-items: flex-start;
+  }
+
+  #planos .pricing-grid > .custom-card > .price-detail {
+    min-height: 0;
+    margin-top: 10px;
+  }
+
+  #planos .pricing-grid > .plan-card > .button {
+    margin-top: 20px;
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  (() => {
+    function iniciarAlinhamento() {
+      const secao = document.getElementById("planos");
+      const grade = secao?.querySelector(".pricing-grid");
+
+      if (!grade || grade.dataset.botoesAlinhados === "true") return;
+      grade.dataset.botoesAlinhados = "true";
+
+      let quadro;
+
+      function alinharBotoes() {
+        const itens = [...grade.querySelectorAll(":scope > .plan-card")]
+          .map(card => ({
+            card,
+            botao: card.querySelector(":scope > .button")
+          }))
+          .filter(item => item.botao);
+
+        if (!itens.length) return;
+
+        /* Remove o espaçamento calculado anteriormente */
+        itens.forEach(({ botao }) => {
+          botao.style.marginTop = "20px";
+        });
+
+        /* Mede cada botão em relação ao próprio cartão */
+        const posicoes = itens.map(({ card, botao }) =>
+          botao.offsetTop + card.clientTop
+        );
+
+        const posicaoComum = Math.max(...posicoes);
+
+        itens.forEach(({ botao }, indice) => {
+          const espaco = 20 + posicaoComum - posicoes[indice];
+          botao.style.marginTop = `${espaco}px`;
+        });
+      }
+
+      function atualizar() {
+        cancelAnimationFrame(quadro);
+        quadro = requestAnimationFrame(alinharBotoes);
+      }
+
+      window.addEventListener("resize", atualizar, { passive: true });
+
+      secao.querySelectorAll("[data-period]").forEach(botao => {
+        botao.addEventListener("click", atualizar);
+      });
+
+      if (document.fonts) {
+        document.fonts.ready.then(atualizar);
+      }
+
+      atualizar();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener(
+        "DOMContentLoaded",
+        iniciarAlinhamento,
+        { once: true }
+      );
+    } else {
+      iniciarAlinhamento();
+    }
+  })();
+</script>
+
+
 </body>
 </html>
