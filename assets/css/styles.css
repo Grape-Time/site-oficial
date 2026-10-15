@@ -3699,22 +3699,37 @@ p {
     }
   }
 
-
-/* Alinhamento uniforme dos botoes Contratar dos planos */
+/* 1. Distância entre o texto de desconto e o botão Contratar Custom */
 #planos .custom-offer {
-  margin-bottom: 24px;
+  margin-top: 18px !important;
+  margin-bottom: 28px !important;
 }
 
+/* 2. Cria uma área de topo com altura idêntica para todos os 4 cards */
 #planos .plan-card {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* 3. Garante que o bloco superior (Título + Descrição + Preço/Aviso) tenha a mesma altura total */
+#planos .plan-card > .plan-description {
+  min-height: 48px;
+}
+
+/* Bloco dos 3 primeiros cards para alcançar a altura do Custom */
+#planos .plan-card:not(.custom-card) .price-detail {
+  min-height: 105px !important;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
-#planos .price-detail {
-  min-height: 52px !important;
-  margin-top: 8px;
+/* Bloco de conteúdo do card Custom para bater exatamente na mesma medida */
+#planos .custom-card .custom-offer {
+  min-height: 65px;
 }
 
+/* 4. Fixa o alinhamento dos botões */
 #planos .plan-card > .button {
-  margin-top: auto !important;
+  margin-top: 20px !important;
 }
